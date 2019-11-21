@@ -1,4 +1,4 @@
-package com.leyouxianggou;
+package com.leyouxianggou.item;
 
 
 import org.springframework.boot.SpringApplication;
