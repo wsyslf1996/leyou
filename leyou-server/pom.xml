@@ -7,12 +7,13 @@
     <groupId>com.leyouxianggou.parent</groupId>
     <artifactId>leyou-server</artifactId>
     <version>1.0.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
     <modules>
         <module>ly-registry</module>
-        <module>ly-api-gateway</module>
+        <module>ly-gateway</module>
+        <module>ly-item</module>
+        <module>ly-common</module>
     </modules>
-
-    <packaging>pom</packaging>
 
     <name>leyou-server</name>
     <description>Leyou project server</description>
@@ -91,15 +92,15 @@
         </plugins>
     </build>
 
-<!--    <repositories>-->
-<!--        <repository>-->
-<!--            <id>spring-milestones</id>-->
-<!--            <name>Spring Milestones</name>-->
-<!--            <url>https://repo.spring.io/milestone</url>-->
-<!--            <snapshots>-->
-<!--                <enabled>false</enabled>-->
-<!--            </snapshots>-->
-<!--        </repository>-->
-<!--    </repositories>-->
+    <repositories>
+        <repository>
+            <id>spring-milestones</id>
+            <name>Spring Milestones</name>
+            <url>https://repo.spring.io/milestone</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>
