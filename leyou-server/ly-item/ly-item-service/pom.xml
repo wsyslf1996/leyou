@@ -39,6 +39,12 @@
             <artifactId>ly-item-interface</artifactId>
             <version>1.0.0-SNAPSHOT</version>
         </dependency>
+        <!--    添加公共层依赖,引入Controller拦截功能    -->
+        <dependency>
+            <groupId>com.leyouxianggou.common</groupId>
+            <artifactId>ly-common</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>
