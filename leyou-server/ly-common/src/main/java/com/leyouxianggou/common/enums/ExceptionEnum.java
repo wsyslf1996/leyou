@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Getter
 public enum ExceptionEnum {
-    PRICE_NOT_NULL(200,"123")
+    CATEGORY_NOT_FOUND(404,"商品分类数据没有查询到");
     ;
     private Integer code;
     private String msg;

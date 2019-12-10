@@ -1,6 +1,7 @@
 package com.leyouxianggou.item;
 
 import lombok.Data;
+import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,7 +12,7 @@ import javax.persistence.Table;
 @Data
 public class Category {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    @KeySql(useGeneratedKeys = true)
     private Long id;
     private String name;
     private Long parentId;
