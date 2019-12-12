@@ -8,6 +8,7 @@ import com.leyouxianggou.common.exception.LyException;
 import com.leyouxianggou.common.vo.PageResult;
 import com.leyouxianggou.item.Brand;
 import com.leyouxianggou.item.mapper.BrandMapper;
+import com.leyouxianggou.item.mapper.CategoryMapper;
 import com.leyouxianggou.item.service.BrandService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class BrandServiceImpl implements BrandService {
 
     @Autowired
     private BrandMapper brandMapper;
+
+    @Autowired
+    private CategoryMapper categoryMapper;
 
     /**
      * 分页查询品牌信息
@@ -50,6 +54,7 @@ public class BrandServiceImpl implements BrandService {
 
         //排序
         //设置排序子句，sql: id DESC，example.setOrderByClause()方法会自动拼接到sql后面
+        //sort by id desc,sort by 会自动生成
         if (StringUtils.isNotBlank(sortBy)) {
             example.setOrderByClause(sortBy + " " + (desc ? "DESC" : "ASC"));
         }
@@ -64,5 +69,10 @@ public class BrandServiceImpl implements BrandService {
         PageInfo<Brand> pageInfo = new PageInfo<>(list);
 
         return new PageResult<>(pageInfo.getTotal(), list);
+    }
+
+    @Override
+    public void insertBrand(Brand brand, List<Long> cids) {
+        brandMapper.insert(brand);
     }
 }
