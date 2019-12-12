@@ -25,9 +25,6 @@ public class BrandServiceImpl implements BrandService {
     @Autowired
     private BrandMapper brandMapper;
 
-    @Autowired
-    private CategoryMapper categoryMapper;
-
     /**
      * 分页查询品牌信息
      *
@@ -35,7 +32,7 @@ public class BrandServiceImpl implements BrandService {
      * @param pageSize 每页数据条数
      * @param desc     是否降序
      * @param sortBy   排序字段
-     * @param key      搜索关键字(可按品牌字母和品牌名称搜索)
+     * @param key      过滤搜索关键字(可按品牌字母和品牌名称搜索)
      * @return
      */
     @Override
@@ -71,8 +68,21 @@ public class BrandServiceImpl implements BrandService {
         return new PageResult<>(pageInfo.getTotal(), list);
     }
 
+    /**
+     * 新增品牌信息
+     * @param brand
+     * @param cids
+     */
     @Override
     public void insertBrand(Brand brand, List<Long> cids) {
-        brandMapper.insert(brand);
+        brand.setId(null);
+        int count = brandMapper.insert(brand);
+        if(count!=1) throw new LyException(ExceptionEnum.BRAND_INSERT_ERROR);
+        Long bid = brand.getId();
+        //新增品牌种类中间表
+        for (Long cid : cids) {
+            count = brandMapper.insertCategoryBrand(cid,bid);
+            if(count!=1) throw new LyException(ExceptionEnum.BRAND_INSERT_ERROR);
+        }
     }
 }

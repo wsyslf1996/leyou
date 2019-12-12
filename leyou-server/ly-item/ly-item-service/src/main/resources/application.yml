@@ -19,6 +19,6 @@ eureka:
     ip-address: 127.0.0.1
 
 #mybatis打印sql
-mybatis:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#mybatis:
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
