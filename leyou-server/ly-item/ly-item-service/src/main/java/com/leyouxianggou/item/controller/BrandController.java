@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Api("品牌服务")
 @RestController
 @RequestMapping("/brand")
 public class BrandController {
@@ -38,6 +37,10 @@ public class BrandController {
 
     }
 
+    @ApiOperation(value = "",notes = "")
+    @ApiImplicitParams({
+    	@ApiImplicitParam(name = "null",value = "")
+    })
     @PostMapping
     public ResponseEntity<Void> insertBrand(Brand brand, @RequestParam("cids")List<Long> cids){
         brandService.insertBrand(brand,cids);
