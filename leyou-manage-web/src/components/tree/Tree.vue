@@ -58,6 +58,7 @@
       },
       handleAdd(node) {
         this.$emit("handleAdd", this.copyNodeInfo(node));
+        this.getData()
       },
       handleEdit(id, name) {
         this.$emit("handleEdit", id, name),

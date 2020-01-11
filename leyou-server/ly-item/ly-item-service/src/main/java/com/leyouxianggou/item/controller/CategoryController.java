@@ -25,9 +25,21 @@ public class CategoryController {
         return ResponseEntity.ok(categoryService.queryCategoryByBid(bid));
     }
 
+    @PostMapping
+    public ResponseEntity<Category> insertCategory(Category category){
+        categoryService.insertCategory(category);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
     @PutMapping
     public ResponseEntity<Void> updateCategory(@RequestParam("id")Long id,@RequestParam("name")String name){
         categoryService.updateCategory(id,name);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteCategory(@PathVariable("id")Long id){
+        categoryService.deleteCategory(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

@@ -147,7 +147,8 @@ export default {
           segments:[],
           numeric:false,
           searching:false,
-          generic:false}
+          generic:false};
+      this.isEdit = false;
       this.show = true;
     },
     deleteParam(id) {
@@ -156,10 +157,13 @@ export default {
             this.$http.delete("/item/spec/param/" + id)
             .then(() => {
                 this.$message.success("删除成功");
+                this.loadData();
             })
             .catch(() => {
                 this.$message.error("删除失败");
             })
+        }).catch(()=>{
+            this.$message.info("已取消删除");
         })
     },
     formatBoolean(boo) {
@@ -172,7 +176,7 @@ export default {
         this.$http({
             method: this.isEdit ? 'put' : 'post',
             url: '/item/spec/param',
-            data: p,
+            data: this.$qs.stringify(p),
         }).then(() => {
             // 关闭窗口
             this.show = false;

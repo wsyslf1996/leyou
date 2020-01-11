@@ -53,4 +53,10 @@ public class BrandController {
         brandService.updateBrand(brand,cids);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteBrand(@PathVariable("id")Long id){
+        brandService.deleteBrand(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

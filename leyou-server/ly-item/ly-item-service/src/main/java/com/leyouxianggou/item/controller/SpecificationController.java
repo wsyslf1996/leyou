@@ -33,8 +33,32 @@ public class SpecificationController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @DeleteMapping("/group/{id}")
+    public ResponseEntity<Void> deleteSpecGroup(@PathVariable("id")Long id){
+        specificationService.deleteSpecGroup(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
     @GetMapping("/params")
     public ResponseEntity<List<SpecParam>> querySpecParamByGid(@RequestParam("gid")Long gid){
         return ResponseEntity.ok(specificationService.querySpecParamByGid(gid));
+    }
+
+    @PostMapping("/param")
+    public ResponseEntity<Void> insertSpecParam(SpecParam specParam){
+        specificationService.insertSpecParam(specParam);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/param")
+    public ResponseEntity<Void> updateSpecParam(SpecParam specParam){
+        specificationService.updateSpecParam(specParam);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/param/{id}")
+    public ResponseEntity<Void> deleteSpecParam(@PathVariable("id")Long id){
+        specificationService.deleteSpecParam(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

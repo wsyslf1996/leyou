@@ -36,13 +36,29 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public void insertCategory(Category category) {
+        category.setId(null);
+        int count = categoryMapper.insert(category);
+        if(count!=1){
+            throw new LyException(ExceptionEnum.CATEGORY_NOT_FOUND);
+        }
+    }
+
+    @Override
     public void updateCategory(Long id, String name) {
         Category category = new Category();
         category.setId(id);
         category.setName(name);
-        int count = categoryMapper.updateCategory(id,name);
+        int count = categoryMapper.updateByPrimaryKeySelective(category);
         if(count!=1){
             throw new LyException(ExceptionEnum.CATEGORY_UPDATE_ERROR);
         }
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        Category category = new Category();
+        category.setId(id);
+        categoryMapper.deleteByPrimaryKey(category);
     }
 }

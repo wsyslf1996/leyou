@@ -143,7 +143,12 @@
               cancelButtonText: '取消',
               type: 'warning'
           }).then(() => {
-              // this.handleDelete(this.model.id);
+              this.$http.delete("/item/brand/" + brand.id)
+                  .then(() => {
+                      console.log("delete ... " + brand.id);
+                      this.$message.success("删除成功");
+                      this.getDataFromServer();
+                  })
           }).catch(()=>{
               this.$message.info('已取消删除');
           })

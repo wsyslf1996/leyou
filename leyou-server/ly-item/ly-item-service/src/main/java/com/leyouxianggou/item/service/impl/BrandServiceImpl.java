@@ -14,6 +14,7 @@ import com.leyouxianggou.item.service.BrandService;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -88,6 +89,7 @@ public class BrandServiceImpl implements BrandService {
     }
 
     @Override
+    @Transactional
     public void updateBrand(Brand brand, List<Long> cids) {
         Long bid = brand.getId();
         //修改品牌逻辑梳理，如果传过来的cids没有变动，则不用管中间表。否则再新增或删除。
@@ -97,5 +99,17 @@ public class BrandServiceImpl implements BrandService {
             int count = brandMapper.insertCategoryBrand(cid, bid);
             if(count !=1) throw new LyException(ExceptionEnum.BRAND_UPDATE_ERROR);
         });
+    }
+
+    @Override
+    @Transactional
+    public void deleteBrand(Long id) {
+        // 删除中间表
+        brandMapper.deleteCategoryBrandByBid(id);
+
+        // 删除Brand信息
+        Brand brand = new Brand();
+        brand.setId(id);
+        brandMapper.deleteByPrimaryKey(brand);
     }
 }

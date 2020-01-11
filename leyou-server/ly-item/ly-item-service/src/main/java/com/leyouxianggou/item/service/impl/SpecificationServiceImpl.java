@@ -10,6 +10,7 @@ import com.leyouxianggou.item.service.SpecificationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
@@ -54,6 +55,20 @@ public class SpecificationServiceImpl implements SpecificationService {
     }
 
     @Override
+    @Transactional
+    public void deleteSpecGroup(Long id) {
+
+        // 删除一个分组下的所有参数信息
+        SpecParam specParam = new SpecParam();
+        specParam.setGroupId(id);
+        specParamMapper.delete(specParam);
+        // 删除一个分组
+        SpecGroup specGroup = new SpecGroup();
+        specGroup.setId(id);
+        specGroupMapper.deleteByPrimaryKey(specGroup);
+    }
+
+    @Override
     public List<SpecParam> querySpecParamByGid(Long gid) {
         SpecParam specParam = new SpecParam();
         specParam.setGroupId(gid);
@@ -63,5 +78,28 @@ public class SpecificationServiceImpl implements SpecificationService {
             throw new LyException(ExceptionEnum.SPEC_PARAM_NOT_FOUND);
         }
         return list;
+    }
+
+    @Override
+    public void insertSpecParam(SpecParam specParam) {
+        int count = specParamMapper.insert(specParam);
+        if(count!=1){
+            throw new LyException(ExceptionEnum.SPEC_PARAM_INSERT_ERROR);
+        }
+    }
+
+    @Override
+    public void updateSpecParam(SpecParam specParam) {
+        int count = specParamMapper.updateByPrimaryKeySelective(specParam);
+        if(count!=1){
+            throw new LyException(ExceptionEnum.SPEC_PARAM_INSERT_ERROR);
+        }
+    }
+
+    @Override
+    public void deleteSpecParam(Long id) {
+        SpecParam specParam = new SpecParam();
+        specParam.setId(id);
+        specParamMapper.deleteByPrimaryKey(specParam);
     }
 }
