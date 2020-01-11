@@ -6,4 +6,9 @@ import java.util.List;
 
 public interface CategoryService {
     List<Category> queryCategoryByPid(Long pid);
+
+    List<Category> queryCategoryByBid(Long bid);
+
+    void updateCategory(Long id, String name);
+
 }

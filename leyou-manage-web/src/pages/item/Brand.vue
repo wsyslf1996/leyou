@@ -137,6 +137,17 @@
             this.oldBrand.categories = data;
           })
       },
+      deleteBrand(brand){
+          this.$message.confirm('此操作将永久删除数据，是否继续?', '提示', {
+              confirmButtonText: '确定删除',
+              cancelButtonText: '取消',
+              type: 'warning'
+          }).then(() => {
+              // this.handleDelete(this.model.id);
+          }).catch(()=>{
+              this.$message.info('已取消删除');
+          })
+      },
       closeWindow(){
         // 重新加载数据
         this.getDataFromServer();

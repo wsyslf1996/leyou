@@ -2,6 +2,7 @@ package com.leyouxianggou.item.controller;
 
 import com.leyouxianggou.common.vo.PageResult;
 import com.leyouxianggou.item.Brand;
+import com.leyouxianggou.item.Category;
 import com.leyouxianggou.item.service.BrandService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
@@ -45,5 +46,11 @@ public class BrandController {
     public ResponseEntity<Void> insertBrand(Brand brand, @RequestParam("cids")List<Long> cids){
         brandService.insertBrand(brand,cids);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping
+    public ResponseEntity<Void> updateBrand(Brand brand,@RequestParam("cids")List<Long> cids){
+        brandService.updateBrand(brand,cids);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 }

@@ -7,6 +7,7 @@ import com.leyouxianggou.common.enums.ExceptionEnum;
 import com.leyouxianggou.common.exception.LyException;
 import com.leyouxianggou.common.vo.PageResult;
 import com.leyouxianggou.item.Brand;
+import com.leyouxianggou.item.Category;
 import com.leyouxianggou.item.mapper.BrandMapper;
 import com.leyouxianggou.item.mapper.CategoryMapper;
 import com.leyouxianggou.item.service.BrandService;
@@ -84,5 +85,17 @@ public class BrandServiceImpl implements BrandService {
             count = brandMapper.insertCategoryBrand(cid,bid);
             if(count!=1) throw new LyException(ExceptionEnum.BRAND_INSERT_ERROR);
         }
+    }
+
+    @Override
+    public void updateBrand(Brand brand, List<Long> cids) {
+        Long bid = brand.getId();
+        //修改品牌逻辑梳理，如果传过来的cids没有变动，则不用管中间表。否则再新增或删除。
+        brandMapper.updateByPrimaryKey(brand);
+        brandMapper.deleteCategoryBrandByBid(bid);
+        cids.forEach(cid->{
+            int count = brandMapper.insertCategoryBrand(cid, bid);
+            if(count !=1) throw new LyException(ExceptionEnum.BRAND_UPDATE_ERROR);
+        });
     }
 }
