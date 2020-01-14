@@ -14,4 +14,6 @@ public interface CategoryService {
     void insertCategory(Category category);
 
     void deleteCategory(Long id);
+
+    List<Category> queryByIds(List<Long> ids);
 }

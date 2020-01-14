@@ -101,7 +101,7 @@
           {text: 'id', align: 'center', sortable: false, value: 'id'},
           {text: '标题', align: 'center', sortable: false, value: 'title'},
           {text: '商品分类', align: 'center', sortable: false, value: 'cname'},
-          {text: '品牌', align: 'center', value: 'bname', sortable: false,},
+          {text: '品牌', align: 'center', sortable: false, value: 'bname'},
           {text: '操作', align: 'center', sortable: false}
         ],
         show: false,// 控制对话框的显示

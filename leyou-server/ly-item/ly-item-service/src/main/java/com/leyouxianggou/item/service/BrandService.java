@@ -14,4 +14,8 @@ public interface BrandService {
     void updateBrand(Brand brand, List<Long> cids);
 
     void deleteBrand(Long id);
+
+    Brand queryById(Long id);
+
+    List<Brand> queryBrandByCid(Long cid);
 }

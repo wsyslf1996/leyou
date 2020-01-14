@@ -76,6 +76,7 @@ public class BrandServiceImpl implements BrandService {
      * @param cids
      */
     @Override
+    @Transactional
     public void insertBrand(Brand brand, List<Long> cids) {
         brand.setId(null);
         int count = brandMapper.insert(brand);
@@ -108,8 +109,24 @@ public class BrandServiceImpl implements BrandService {
         brandMapper.deleteCategoryBrandByBid(id);
 
         // 删除Brand信息
-        Brand brand = new Brand();
-        brand.setId(id);
-        brandMapper.deleteByPrimaryKey(brand);
+        brandMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public Brand queryById(Long id) {
+        Brand brand = brandMapper.selectByPrimaryKey(id);
+        if(brand==null){
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+        return brand;
+    }
+
+    @Override
+    public List<Brand> queryBrandByCid(Long cid) {
+        List<Brand> list = brandMapper.queryBrandByCid(cid);
+        if(CollectionUtils.isEmpty(list)){
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+        return list;
     }
 }

@@ -57,8 +57,15 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long id) {
-        Category category = new Category();
-        category.setId(id);
-        categoryMapper.deleteByPrimaryKey(category);
+        categoryMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Category> queryByIds(List<Long> ids){
+        List<Category> list = categoryMapper.selectByIdList(ids);
+        if(CollectionUtils.isEmpty(list)){
+            throw new LyException(ExceptionEnum.CATEGORY_NOT_FOUND);
+        }
+        return list;
     }
 }

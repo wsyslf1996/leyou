@@ -25,7 +25,9 @@ public enum ExceptionEnum {
     SPEC_PARAM_INSERT_ERROR(500,"新增规格参数失败"),
     SPEC_PARAM_UPDATE_ERROR(500,"更新规格组失败"),
 
-    INVALID_FILE_TYPE(400,"无效的文件类型")
+    INVALID_FILE_TYPE(400,"无效的文件类型"),
+
+    GOODS_NOT_FOUND(404,"商品SPU信息未查询到"),
     ;
     private Integer code;
     private String msg;
