@@ -5,6 +5,7 @@ import tk.mybatis.mapper.annotation.KeySql;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Table(name = "tb_spu")
 @Data
@@ -30,5 +31,11 @@ public class Spu {
 
     @Transient
     private String bname;
+
+    @Transient
+    private SpuDetail spuDetail;
+
+    @Transient
+    private List<Sku> skus;
 
 }

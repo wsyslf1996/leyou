@@ -1,14 +1,16 @@
 package com.leyouxianggou.item.controller;
 
 import com.leyouxianggou.common.vo.PageResult;
+import com.leyouxianggou.item.Sku;
 import com.leyouxianggou.item.Spu;
+import com.leyouxianggou.item.SpuDetail;
 import com.leyouxianggou.item.service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class GoodsController {
@@ -24,8 +26,49 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.querySpuByPage(key,saleable,page,pageSize));
     }
 
-//    @GetMapping("/spu/detail/{id}")
-//    public ResponseEntity<String> querySpuDetailBySpuId(@PathVariable("id")Long id){
-//        return null;
-//    }
+    @PostMapping("/goods")
+    public ResponseEntity<Void> insertGoods(@RequestBody Spu spu){
+        goodsService.insertGoods(spu);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PutMapping("/goods")
+    public ResponseEntity<Void> updateGoods(@RequestBody Spu spu){
+        goodsService.updateGoods(spu);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @DeleteMapping("/goods/{spuId}")
+    public ResponseEntity<Void> deleteGoods(@PathVariable("spuId")Long spuId){
+        goodsService.deleteGoods(spuId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    /**
+     *
+     * @param spuId
+     * @return
+     */
+    @GetMapping("/spu/detail/{id}")
+    public ResponseEntity<SpuDetail> queryDetailById(@PathVariable("id")Long spuId){
+        return ResponseEntity.ok(goodsService.queryDetailById(spuId));
+    }
+
+    @GetMapping("/sku/list")
+    public ResponseEntity<List<Sku>> querySkuListBySpuID(@RequestParam("id")Long spuId){
+        return ResponseEntity.ok(goodsService.querySkuListBySpuID(spuId));
+    }
+
+    @PostMapping("/spu/onshelves")
+    public ResponseEntity<Void> onShelves(@RequestParam("spuId")Long spuId){
+        goodsService.onShelves(spuId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PostMapping("/spu/offshelves")
+    public ResponseEntity<Void> offShelves(@RequestParam("spuId")Long spuId){
+        goodsService.offShelves(spuId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
 }

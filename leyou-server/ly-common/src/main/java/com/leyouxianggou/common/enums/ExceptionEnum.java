@@ -28,6 +28,16 @@ public enum ExceptionEnum {
     INVALID_FILE_TYPE(400,"无效的文件类型"),
 
     GOODS_NOT_FOUND(404,"商品SPU信息未查询到"),
+    GOODS_INSERT_ERROR(500,"新增商品失败"),
+
+    GOODS_DETAIL_NOT_FOUND(404,"商品详情信息未查询到"),
+    GOODS_DETAIL_UPDATE_ERROR(500,"商品详情信息更新失败"),
+
+    GOODS_SKU_NOT_FOUND(404,"商品SKU未查询到"),
+    GOODS_STOCK_NOT_FOUND(404,"商品库存未查询到"),
+
+    GOODS_SPU_UPDATE_ERROR(500,"商品SPU更新失败"),
+    GOODS_SPU_DETAIL_UPDATE_ERROR(500,"商品SPU Detail更新失败"),
     ;
     private Integer code;
     private String msg;
