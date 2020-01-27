@@ -24,6 +24,10 @@ public class CategoryController {
     public ResponseEntity<List<Category>> queryCategoryByBid(@PathVariable("bid")Long bid){
         return ResponseEntity.ok(categoryService.queryCategoryByBid(bid));
     }
+    @GetMapping("/ids")
+    public ResponseEntity<List<Category>> queryCategoryByIds(@RequestParam("ids")List<Long> ids){
+        return ResponseEntity.ok(categoryService.queryByIds(ids));
+    }
 
     @PostMapping
     public ResponseEntity<Category> insertCategory(Category category){
