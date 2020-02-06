@@ -9,6 +9,8 @@ spring:
       cluster-nodes: 121.41.17.189:9300
   main:
     allow-bean-definition-overriding: true #解决Bean重复注册问题
+  jackson:
+    default-property-inclusion: non_null # 解决返回model中有null值的属性，有null则不返回
 
 eureka:
   client:

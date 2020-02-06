@@ -2,16 +2,25 @@ package com.leyouxianggou.search.service.impl;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.leyouxianggou.common.utils.JsonUtils;
+import com.leyouxianggou.common.vo.PageResult;
 import com.leyouxianggou.item.*;
 import com.leyouxianggou.search.client.BrandClient;
 import com.leyouxianggou.search.client.CategoryClient;
 import com.leyouxianggou.search.client.GoodsClient;
 import com.leyouxianggou.search.client.SpecificationClient;
 import com.leyouxianggou.search.pojo.Goods;
+import com.leyouxianggou.search.pojo.SearchRequest;
+import com.leyouxianggou.search.repository.GoodsRepository;
 import com.leyouxianggou.search.service.SearchService;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
+import org.elasticsearch.index.query.QueryBuilder;
+import org.elasticsearch.index.query.QueryBuilders;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.query.*;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -31,6 +40,9 @@ public class SearchServiceImpl implements SearchService {
 
     @Autowired
     private SpecificationClient specificationClient;
+
+    @Autowired
+    private GoodsRepository repository;
 
     @Override
     public Goods buildGoods(Spu spu) {
@@ -100,6 +112,30 @@ public class SearchServiceImpl implements SearchService {
         }
         goods.setSpecs(specs);
         return goods;
+    }
+
+    @Override
+    public PageResult<Goods> searchGoods(SearchRequest searchRequest) {
+        String key = searchRequest.getKey();
+        Integer page = searchRequest.getPage() - 1; // ES中页码是从0开始的
+        Integer size = searchRequest.getSize();
+
+        // 创建查询构建器
+        NativeSearchQueryBuilder queryBuilder = new NativeSearchQueryBuilder();
+        // 设置分页查询
+        queryBuilder.withPageable(PageRequest.of(page,size));
+        // 设置关键字查询
+        queryBuilder.withQuery(QueryBuilders.matchQuery("all",key));
+        // 过滤不需要的字段(保留需要的字段)
+        queryBuilder.withSourceFilter(new FetchSourceFilter(new String[]{"id","subTitle","skus"},null));
+
+        // 查询
+        Page<Goods> result = repository.search(queryBuilder.build());
+
+        long total = result.getTotalElements();
+        long totalPage = result.getTotalPages();
+        List<Goods> items = result.getContent();
+        return new PageResult<Goods>(total,totalPage,items);
     }
 
     private String chooseSegment(String value, SpecParam p) {

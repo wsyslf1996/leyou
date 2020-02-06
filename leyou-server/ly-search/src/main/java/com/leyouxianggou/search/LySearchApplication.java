@@ -8,8 +8,8 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-public class LySearch {
+public class LySearchApplication {
     public static void main(String[] args) {
-        SpringApplication.run(LySearch.class,args);
+        SpringApplication.run(LySearchApplication.class,args);
     }
 }

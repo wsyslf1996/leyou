@@ -1,0 +1,21 @@
+package com.leyouxianggou.search.web;
+
+import com.leyouxianggou.common.vo.PageResult;
+import com.leyouxianggou.search.pojo.Goods;
+import com.leyouxianggou.search.pojo.SearchRequest;
+import com.leyouxianggou.search.service.SearchService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+public class SearchController {
+
+    @Autowired
+    private SearchService searchService;
+
+    @PostMapping("/page")
+    public ResponseEntity<PageResult<Goods>> search(@RequestBody SearchRequest searchRequest){
+        return  ResponseEntity.ok(searchService.searchGoods(searchRequest));
+    }
+}
