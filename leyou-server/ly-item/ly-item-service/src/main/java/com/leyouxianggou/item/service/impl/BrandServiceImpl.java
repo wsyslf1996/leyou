@@ -129,4 +129,13 @@ public class BrandServiceImpl implements BrandService {
         }
         return list;
     }
+
+    @Override
+    public List<Brand> queryByIds(List<Long> ids) {
+        List<Brand> list = brandMapper.selectByIdList(ids);
+        if(CollectionUtils.isEmpty(list)){
+            throw new LyException(ExceptionEnum.BRAND_NOT_FOUND);
+        }
+        return list;
+    }
 }

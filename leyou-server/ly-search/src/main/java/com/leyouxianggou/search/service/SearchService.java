@@ -1,12 +1,12 @@
 package com.leyouxianggou.search.service;
 
-import com.leyouxianggou.common.vo.PageResult;
 import com.leyouxianggou.item.Spu;
 import com.leyouxianggou.search.pojo.Goods;
 import com.leyouxianggou.search.pojo.SearchRequest;
+import com.leyouxianggou.search.pojo.SearchResult;
 
 public interface SearchService {
-    public Goods buildGoods(Spu spu);
+    Goods buildGoods(Spu spu);
 
-    PageResult<Goods> searchGoods(SearchRequest searchRequest);
+    SearchResult searchGoods(SearchRequest searchRequest);
 }

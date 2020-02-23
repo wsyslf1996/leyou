@@ -6,7 +6,7 @@ spring:
     name: item-service
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://192.168.116.128:3306/leyou
+    url: jdbc:mysql://121.41.17.189:3306/leyou
     username: root
     password: 123456
 
