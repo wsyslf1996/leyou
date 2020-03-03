@@ -8,6 +8,11 @@ spring:
     cache: false
   main:
     allow-bean-definition-overriding: true #解决Bean重复注册问题
+  rabbitmq:
+    host: 192.168.116.128
+    username: wsyslf1996
+    password: 61196202e
+    virtual-host: /leyou
 
 eureka:
   client:

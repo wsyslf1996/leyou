@@ -3,6 +3,7 @@ package com.leyouxianggou.item.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.leyouxianggou.common.enums.ExceptionEnum;
+import com.leyouxianggou.common.enums.LYMQRoutingKey;
 import com.leyouxianggou.common.exception.LyException;
 import com.leyouxianggou.common.vo.PageResult;
 import com.leyouxianggou.item.*;
@@ -15,6 +16,7 @@ import com.leyouxianggou.item.service.CategoryService;
 import com.leyouxianggou.item.service.GoodsService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -47,6 +49,9 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Autowired
     private BrandService brandService;
+
+    @Autowired
+    private AmqpTemplate amqpTemplate;
 
     @Override
     public PageResult<Spu> querySpuByPage(String key, Boolean saleable, int page, int pageSize) {
@@ -126,11 +131,13 @@ public class GoodsServiceImpl implements GoodsService {
             throw new LyException(ExceptionEnum.GOODS_INSERT_ERROR);
         }
         insertStockAndSkuBySpu(spu);
+        amqpTemplate.convertAndSend(LYMQRoutingKey.ITEM_INSERT,spu.getId());
     }
 
     @Override
     @Transactional
     public void updateGoods(Spu spu) {
+        // 拟解决：当spu中没有sku时，即没有实际商品而只有上架信息时，删除商品SPU信息否？
         if(CollectionUtils.isEmpty(spu.getSkus())){
 
         }
@@ -154,6 +161,9 @@ public class GoodsServiceImpl implements GoodsService {
         if(count!=1){
             throw new LyException(ExceptionEnum.GOODS_SPU_DETAIL_UPDATE_ERROR);
         }
+
+        // 给mq发送消息
+        amqpTemplate.convertAndSend(LYMQRoutingKey.ITEM_UPDATE,spu.getId());
     }
 
     @Override
@@ -168,6 +178,9 @@ public class GoodsServiceImpl implements GoodsService {
 
         //删除Spu
         spuMapper.deleteByPrimaryKey(spuId);
+
+        // 向mq发送消息
+        amqpTemplate.convertAndSend(LYMQRoutingKey.ITEM_DELETE,spuId);
     }
 
     @Override
@@ -249,6 +262,9 @@ public class GoodsServiceImpl implements GoodsService {
         spu.setSaleable(true);
         spu.setLastUpdateTime(new Date());
         spuMapper.updateByPrimaryKeySelective(spu);
+
+        // 向mq 发送消息
+        amqpTemplate.convertAndSend(LYMQRoutingKey.ITEM_ON_SHELVES,spuId);
     }
 
     /**
@@ -262,5 +278,8 @@ public class GoodsServiceImpl implements GoodsService {
         spu.setSaleable(false);
         spu.setLastUpdateTime(new Date());
         spuMapper.updateByPrimaryKeySelective(spu);
+
+        // 向mq 发送消息
+        amqpTemplate.convertAndSend(LYMQRoutingKey.ITEM_OFF_SHELVES,spuId);
     }
 }

@@ -9,4 +9,8 @@ public interface SearchService {
     Goods buildGoods(Spu spu);
 
     SearchResult searchGoods(SearchRequest searchRequest);
+
+    void insertOrUpdateGoodsIndex(long spuId);
+
+    void deleteGoodsIndex(long spuId);
 }

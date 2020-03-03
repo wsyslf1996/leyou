@@ -5,12 +5,17 @@ spring:
     name: search-service
   data:
     elasticsearch:
-      cluster-name: docker-cluster
+      cluster-name: docker-cluster  #节点名称，在elasticsearch配置文件中可以看到
       cluster-nodes: 121.41.17.189:9300
   main:
     allow-bean-definition-overriding: true #解决Bean重复注册问题
   jackson:
     default-property-inclusion: non_null # 解决返回model中有null值的属性，有null则不返回
+  rabbitmq:
+    host: 192.168.116.128
+    username: wsyslf1996
+    password: 61196202e
+    virtual-host: /leyou
 
 eureka:
   client:

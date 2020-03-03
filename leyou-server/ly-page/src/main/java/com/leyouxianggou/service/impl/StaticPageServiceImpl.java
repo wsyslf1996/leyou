@@ -78,7 +78,16 @@ public class StaticPageServiceImpl implements StaticPageService {
                 }
             }
         }
+        log.info("创建商品详情静态页成功，路径："+dest.getAbsolutePath());
+    }
 
+    @Override
+    public void deleteHtml(long spuId) {
+        File file = new File(staticPageConfigurationProperties.getPath(),spuId+".html");
+        if(file.exists()){
+            file.delete();
+            log.info("删除商品详情页，商品SpuID："+spuId);
+        }
     }
 
     /**

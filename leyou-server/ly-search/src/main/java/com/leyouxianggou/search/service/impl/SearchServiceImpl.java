@@ -13,6 +13,7 @@ import com.leyouxianggou.search.pojo.SearchRequest;
 import com.leyouxianggou.search.pojo.SearchResult;
 import com.leyouxianggou.search.repository.GoodsRepository;
 import com.leyouxianggou.search.service.SearchService;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.elasticsearch.index.query.BoolQueryBuilder;
@@ -34,6 +35,7 @@ import org.springframework.util.CollectionUtils;
 import java.util.*;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 public class SearchServiceImpl implements SearchService {
 
@@ -50,7 +52,7 @@ public class SearchServiceImpl implements SearchService {
     private SpecificationClient specificationClient;
 
     @Autowired
-    private GoodsRepository repository;
+    private GoodsRepository goodsRepository;
 
     @Autowired
     private ElasticsearchTemplate template;
@@ -169,6 +171,24 @@ public class SearchServiceImpl implements SearchService {
         return new SearchResult(total, totalPage, items, categories, brands, specs);
     }
 
+    /**
+     * 新增或修改索引库中的单条记录
+     * @param spuId
+     */
+    @Override
+    public void insertOrUpdateGoodsIndex(long spuId) {
+        Spu spu = goodsClient.querySpuById(spuId);
+        Goods goods = buildGoods(spu);
+        goodsRepository.save(goods);
+        log.info("新增或修改Elasticsearch单个商品记录成功：SpuID：" + spuId);
+    }
+
+    @Override
+    public void deleteGoodsIndex(long spuId) {
+        goodsRepository.deleteById(spuId);
+        log.info("删除Elasticsearch单个商品记录成功：SpuID："+spuId);
+    }
+
     private QueryBuilder buildBasicQueryBuilder(SearchRequest searchRequest) {
         BoolQueryBuilder queryBuilder = QueryBuilders.boolQuery();
         // 查询条件
@@ -218,6 +238,12 @@ public class SearchServiceImpl implements SearchService {
         return specs;
     }
 
+    /**
+     * segment分段操作
+     * @param value
+     * @param p
+     * @return
+     */
     private String chooseSegment(String value, SpecParam p) {
         double val = NumberUtils.toDouble(value);
         String result = "其它";

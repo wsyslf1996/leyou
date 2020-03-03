@@ -1,7 +1,5 @@
-package com.leyouxianggou.search.web;
+package com.leyouxianggou.search.controller;
 
-import com.leyouxianggou.common.vo.PageResult;
-import com.leyouxianggou.search.pojo.Goods;
 import com.leyouxianggou.search.pojo.SearchRequest;
 import com.leyouxianggou.search.pojo.SearchResult;
 import com.leyouxianggou.search.service.SearchService;
