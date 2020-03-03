@@ -21,6 +21,15 @@ public class SpecificationController {
         return ResponseEntity.ok(specificationService.querySpecGroupByCid(cid));
     }
 
+    /**
+     * 查询规格参数组和组内规格参数
+     * @return
+     */
+    @GetMapping("/group")
+    public ResponseEntity<List<SpecGroup>> queryGroupAndParams(@RequestParam("cid")Long cid){
+        return ResponseEntity.ok(specificationService.queryGroupAndParams(cid));
+    }
+
     @PostMapping("/group")
     public ResponseEntity<Void> insertSpecGroup(SpecGroup specGroup){
         specificationService.insertSpecGroup(specGroup);

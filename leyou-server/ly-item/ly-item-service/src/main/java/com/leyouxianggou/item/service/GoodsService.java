@@ -10,6 +10,8 @@ import java.util.List;
 public interface GoodsService {
     PageResult<Spu> querySpuByPage(String key, Boolean saleable, int page, int pageSize);
 
+    Spu querySpuById(Long spuId);
+
     void insertGoods(Spu spu);
 
     SpuDetail queryDetailById(Long spuId);

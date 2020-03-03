@@ -26,6 +26,11 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.querySpuByPage(key,saleable,page,pageSize));
     }
 
+    @GetMapping("/spu/{id}")
+    public ResponseEntity<Spu> querySpuById(@PathVariable("id") Long spuId){
+        return ResponseEntity.ok(goodsService.querySpuById(spuId));
+    }
+
     @PostMapping("/goods")
     public ResponseEntity<Void> insertGoods(@RequestBody Spu spu){
         goodsService.insertGoods(spu);

@@ -8,6 +8,8 @@ import java.util.List;
 public interface SpecificationService {
     List<SpecGroup> querySpecGroupByCid(Long cid);
 
+    List<SpecGroup> queryGroupAndParams(Long cid);
+
     List<SpecParam> querySpecParamList(Long gid, Long cid, Boolean searching);
 
     void insertSpecGroup(SpecGroup specGroup);

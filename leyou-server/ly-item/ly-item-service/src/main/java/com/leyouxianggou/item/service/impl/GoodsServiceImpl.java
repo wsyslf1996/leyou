@@ -72,7 +72,7 @@ public class GoodsServiceImpl implements GoodsService {
         // 查询
         List<Spu> list = spuMapper.selectByExample(example);
         if(CollectionUtils.isEmpty(list)){
-            throw new LyException(ExceptionEnum.GOODS_NOT_FOUND);
+            throw new LyException(ExceptionEnum.GOODS_SPU_NOT_FOUND);
         }
 
         // 解析cid1,cid2,cid3,brand_id这些字段
@@ -89,6 +89,17 @@ public class GoodsServiceImpl implements GoodsService {
         // 封装页面信息
         PageInfo<Spu> pageInfo = new PageInfo<>(list);
         return new PageResult<>(pageInfo.getTotal(),list);
+    }
+
+    @Override
+    public Spu querySpuById(Long spuId) {
+        Spu spu = spuMapper.selectByPrimaryKey(spuId);
+        if(spu == null){
+            throw new LyException(ExceptionEnum.GOODS_SPU_NOT_FOUND);
+        }
+        spu.setSpuDetail(queryDetailById(spuId));
+        spu.setSkus(querySkuListBySpuID(spuId));
+        return spu;
     }
 
     @Override
@@ -227,6 +238,10 @@ public class GoodsServiceImpl implements GoodsService {
         }
     }
 
+    /**
+     * 商品上架
+     * @param spuId
+     */
     @Override
     public void onShelves(Long spuId) {
         Spu spu = new Spu();
@@ -236,6 +251,10 @@ public class GoodsServiceImpl implements GoodsService {
         spuMapper.updateByPrimaryKeySelective(spu);
     }
 
+    /**
+     * 商品下架
+     * @param spuId
+     */
     @Override
     public void offShelves(Long spuId) {
         Spu spu = new Spu();

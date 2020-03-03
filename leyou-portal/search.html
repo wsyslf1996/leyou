@@ -137,7 +137,6 @@
                     <div class="fl key brand">品牌</div>
                     <div class="value logos">
                         <ul class="logo-list">
-                            <!--                            <li><img src="img/_/phone01.png"/></li>-->
                             <li v-for="o in f.options" v-if="o.image"><img :src="o.image" @click="addFilter(f.k,o.id ||o)"/></li>
                             <li v-else v-text="o.letter" style="text-align: center" @click="addFilter(f.k,o.id ||o)">
                                 <a style="line-height: 30px; font-size: 12px" href="#"></a>
@@ -194,7 +193,7 @@
                         <li class="yui3-u-1-5" v-for="goods in this.goodsList" :key="goods.id">
                             <div class="list-wrap">
                                 <div class="p-img">
-                                    <a href="item.html" target="_blank">
+                                    <a :href="'item/'+goods.id+'.html'" target="_blank">
                                         <img :src="goods.selectedSku.images" height="200"/>
                                     </a>
                                     <ul class="skus">

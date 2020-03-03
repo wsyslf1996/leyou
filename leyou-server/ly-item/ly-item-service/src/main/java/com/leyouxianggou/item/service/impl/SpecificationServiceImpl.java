@@ -14,7 +14,10 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.CollectionUtils;
 import tk.mybatis.mapper.entity.Example;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Slf4j
@@ -36,6 +39,24 @@ public class SpecificationServiceImpl implements SpecificationService {
             throw new LyException(ExceptionEnum.SPEC_GROUP_NOT_FOUND);
         }
         return list;
+    }
+
+    @Override
+    public List<SpecGroup> queryGroupAndParams(Long cid) {
+        List<SpecGroup> specGroups = querySpecGroupByCid(cid);
+        List<SpecParam> specParams = querySpecParamList(null, cid, null);
+        Map<Long,List<SpecParam>> map = new HashMap<>();
+        // 查出所有规格参数放入map中,key:groupId value:List<SpecParam>
+        for (SpecParam specParam : specParams) {
+            if(!map.containsKey(specParam.getGroupId())){
+               map.put(specParam.getGroupId(),new ArrayList<>());
+            }
+            map.get(specParam.getGroupId()).add(specParam);
+        }
+        for (SpecGroup specGroup : specGroups) {
+            specGroup.setParams(map.get(specGroup.getId()));
+        }
+        return specGroups;
     }
 
     @Override

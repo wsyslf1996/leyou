@@ -18,6 +18,9 @@ public interface GoodsApi {
                                    @RequestParam(value = "page",defaultValue = "1") int page,
                                    @RequestParam(value = "rows",defaultValue = "5") int pageSize);
 
+    @GetMapping("/spu/{id}")
+    Spu querySpuById(@PathVariable("id") Long spuId);
+
     @GetMapping("/sku/list")
     List<Sku> querySkuListBySpuID(@RequestParam("id")Long spuId);
 
