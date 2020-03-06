@@ -17,11 +17,12 @@ spring:
 eureka:
   client:
     service-url:
-      defaultZone: http://127.0.0.1:10086/eureka
+      defaultZone: http://192.168.116.1:10086/eureka
   instance:
     prefer-ip-address: true
-    ip-address: 127.0.0.1
+    ip-address: 192.168.116.128
+    instance-id: ${spring.application.name}:${server.port}
 
 ly:
   page:
-    path: "D:\\static"
+    path: /leyou/nginx/html

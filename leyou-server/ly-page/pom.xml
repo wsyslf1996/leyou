@@ -9,6 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
+    <packaging>jar</packaging>
+
     <groupId>com.leyouxianggou.service</groupId>
     <artifactId>ly-page</artifactId>
     <version>1.0.0-SNAPSHOT</version>
@@ -34,6 +36,7 @@
             <groupId>com.leyouxianggou.service</groupId>
             <artifactId>ly-item-interface</artifactId>
             <version>1.0.0-SNAPSHOT</version>
+            <type>jar</type>
         </dependency>
         <!--    添加amqp依赖（RabbitMQ的）    -->
         <dependency>
@@ -42,4 +45,15 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <mainClass>com.leyouxianggou.LyPageApplication</mainClass>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 </project>

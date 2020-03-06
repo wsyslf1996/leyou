@@ -12,6 +12,7 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: 127.0.0.1
+    instance-id: ${spring.application.name}:${server.port}
 
     #以下数据方便测试使用，上线请关闭
   server:
