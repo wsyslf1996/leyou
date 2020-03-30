@@ -26,7 +26,7 @@
         </v-dialog>
 
       </v-list-tile-content>
-      <v-list-tile-action v-if="isEdit">
+      <v-list-tile-action v-if="isEdit" v-show="this.model.isParent">
         <v-btn icon @mouseover="c1='primary'" @mouseout="c1=''" :color="c1" @click.stop="addChild">
           <i class="el-icon-plus"/>
         </v-btn>

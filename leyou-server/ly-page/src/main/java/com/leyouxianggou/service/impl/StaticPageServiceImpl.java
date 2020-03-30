@@ -54,8 +54,15 @@ public class StaticPageServiceImpl implements StaticPageService {
      */
     @Override
     public void createHtml(Long spuId){
+        Map<String, Object> data = loadModel(spuId);
+        createHtml(data);
+    }
+
+    @Override
+    public void createHtml(Map<String, Object> data) {
         Context context = new Context();
-        context.setVariables(loadModel(spuId));
+        context.setVariables(data);
+        Long spuId = ((Spu) data.get("spu")).getId();
         File dest = new File(staticPageConfigurationProperties.getPath(),spuId+".html");
         // 删除已存在的html
         if(dest.exists()){
@@ -115,4 +122,5 @@ public class StaticPageServiceImpl implements StaticPageService {
         map.put("specs",specs);
         return map;
     }
+
 }

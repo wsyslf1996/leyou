@@ -25,4 +25,4 @@ eureka:
 
 ly:
   page:
-    path: /leyou/nginx/html
+    path: /leyou/nginx/item

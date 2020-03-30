@@ -1,0 +1,18 @@
+server:
+  port: 8087
+
+spring:
+  application:
+    name: auth-service
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 192.168.116.1
+    instance-id: ${eureka.instance.ip-address}.${server.port}
+    lease-renewal-interval-in-seconds: 5  # 心跳检测频率 测试专用
+    lease-expiration-duration-in-seconds: 15 # 失效扫描 测试专用
+

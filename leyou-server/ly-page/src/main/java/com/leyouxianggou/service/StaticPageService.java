@@ -7,5 +7,7 @@ public interface StaticPageService {
 
     void createHtml(Long spuId);
 
+    void createHtml(Map<String,Object> data);
+
     void deleteHtml(long spuId);
 }

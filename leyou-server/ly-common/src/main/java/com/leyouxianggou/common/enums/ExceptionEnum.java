@@ -37,6 +37,8 @@ public enum ExceptionEnum {
     GOODS_INSERT_ERROR(500,"新增商品失败"),
     GOODS_SPU_UPDATE_ERROR(500,"商品SPU更新失败"),
     GOODS_SPU_DETAIL_UPDATE_ERROR(500,"商品SPU Detail更新失败"),
+
+    UNDEFINED_DATA_TYPE(404,"未定义的数据类型");
     ;
     private Integer code;
     private String msg;

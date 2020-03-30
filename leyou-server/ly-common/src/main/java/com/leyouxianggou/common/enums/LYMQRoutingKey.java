@@ -11,4 +11,6 @@ public abstract class LYMQRoutingKey {
     public static final String ITEM_ON_SHELVES = "item.onshelves";
 
     public static final String ITEM_OFF_SHELVES = "item.offshelves";
+
+    public static final String CHECK_PHONE = "user.check.phone";
 }

@@ -1,6 +1,8 @@
 package com.leyouxianggou.controller;
 
+import com.leyouxianggou.common.enums.LYMQRoutingKey;
 import com.leyouxianggou.service.StaticPageService;
+import org.springframework.amqp.core.AmqpTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ public class StaticPageController {
     public String goodsDetailPage(@PathVariable("id")Long spuId, Model model){
         Map<String,Object> map = staticPageService.goodsDetailPage(spuId);
         model.addAllAttributes(map);
+        // 在将参数传回模板之前，先生成静态页
+        staticPageService.createHtml(map);
         return "item";
     }
 
