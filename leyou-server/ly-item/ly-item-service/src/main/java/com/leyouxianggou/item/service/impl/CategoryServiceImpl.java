@@ -25,4 +25,47 @@ public class CategoryServiceImpl implements CategoryService {
         if (CollectionUtils.isEmpty(list)) throw new LyException(ExceptionEnum.CATEGORY_NOT_FOUND);
         return list;
     }
+
+    @Override
+    public List<Category> queryCategoryByBid(Long bid) {
+        List<Category> list = categoryMapper.queryCategoryByBid(bid);
+        if(CollectionUtils.isEmpty(list)){
+            throw new LyException(ExceptionEnum.CATEGORY_NOT_FOUND);
+        }
+        return list;
+    }
+
+    @Override
+    public void insertCategory(Category category) {
+        category.setId(null);
+        int count = categoryMapper.insert(category);
+        if(count!=1){
+            throw new LyException(ExceptionEnum.CATEGORY_NOT_FOUND);
+        }
+    }
+
+    @Override
+    public void updateCategory(Long id, String name) {
+        Category category = new Category();
+        category.setId(id);
+        category.setName(name);
+        int count = categoryMapper.updateByPrimaryKeySelective(category);
+        if(count!=1){
+            throw new LyException(ExceptionEnum.CATEGORY_UPDATE_ERROR);
+        }
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        categoryMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List<Category> queryByIds(List<Long> ids){
+        List<Category> list = categoryMapper.selectByIdList(ids);
+        if(CollectionUtils.isEmpty(list)){
+            throw new LyException(ExceptionEnum.CATEGORY_NOT_FOUND);
+        }
+        return list;
+    }
 }

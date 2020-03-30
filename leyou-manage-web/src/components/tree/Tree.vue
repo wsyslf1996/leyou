@@ -4,6 +4,7 @@
       class="item" :model="model" v-for="(model, index) in db" :key="index"
       :url="url"
       :isEdit="isEdit"
+      :tipsTitle="tipsTitle"
       :nodes="nodes"
       @handleAdd="handleAdd"
       @handleEdit="handleEdit"
@@ -24,6 +25,7 @@
         type: Boolean,
         default: false
       },
+      tipsTitle: String,
       treeData:{
         type:Array
       }
@@ -56,9 +58,11 @@
       },
       handleAdd(node) {
         this.$emit("handleAdd", this.copyNodeInfo(node));
+        this.getData()
       },
       handleEdit(id, name) {
-        this.$emit("handleEdit", id, name)
+        this.$emit("handleEdit", id, name),
+        this.getData()
       },
       handleDelete(id) {
         this.deleteById(id, this.db);

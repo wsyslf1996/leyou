@@ -1,0 +1,28 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: page-service
+  thymeleaf:
+    cache: false
+  main:
+    allow-bean-definition-overriding: true #解决Bean重复注册问题
+  rabbitmq:
+    host: 192.168.116.128
+    username: wsyslf1996
+    password: 61196202e
+    virtual-host: /leyou
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://192.168.116.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 192.168.116.128
+    instance-id: ${spring.application.name}:${server.port}
+
+ly:
+  page:
+    path: /leyou/nginx/item

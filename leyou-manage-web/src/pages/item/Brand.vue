@@ -137,6 +137,22 @@
             this.oldBrand.categories = data;
           })
       },
+      deleteBrand(brand){
+          this.$message.confirm('此操作将永久删除数据，是否继续?', '提示', {
+              confirmButtonText: '确定删除',
+              cancelButtonText: '取消',
+              type: 'warning'
+          }).then(() => {
+              this.$http.delete("/item/brand/" + brand.id)
+                  .then(() => {
+                      console.log("delete ... " + brand.id);
+                      this.$message.success("删除成功");
+                      this.getDataFromServer();
+                  })
+          }).catch(()=>{
+              this.$message.info('已取消删除');
+          })
+      },
       closeWindow(){
         // 重新加载数据
         this.getDataFromServer();

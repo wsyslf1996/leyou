@@ -1,0 +1,37 @@
+server:
+  port: 8086
+
+spring:
+  application:
+    name: user-service
+
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://121.41.17.189:3306/leyou
+    username: root
+    password: 123456
+
+  # RabbitMQ配置
+  rabbitmq:
+    host: 192.168.116.128
+    username: wsyslf1996
+    password: 61196202e
+    virtual-host: /leyou
+    template:
+      exchange: leyou.sms.exchange
+    publisher-confirms: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 192.168.116.1
+    instance-id: ${eureka.instance.ip-address}.${server.port}
+    lease-renewal-interval-in-seconds: 5  # 心跳检测频率 测试专用
+    lease-expiration-duration-in-seconds: 15 # 失效扫描 测试专用
+
+
+

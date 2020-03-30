@@ -13,6 +13,12 @@
         <module>ly-gateway</module>
         <module>ly-item</module>
         <module>ly-common</module>
+        <module>ly-upload</module>
+        <module>ly-search</module>
+        <module>ly-page</module>
+        <module>ly-sms</module>
+        <module>ly-user</module>
+        <module>ly-auth</module>
     </modules>
 
     <name>leyou-server</name>
@@ -38,6 +44,7 @@
         <pageHelper.starter.version>1.2.12</pageHelper.starter.version>
         <leyou.latest.version>1.0.0-SNAPSHOT</leyou.latest.version>
         <fastDFS.client.version>1.26.1-RELEASE</fastDFS.client.version>
+        <swagger.version>2.9.2</swagger.version>
     </properties>
 
     <dependencyManagement>
@@ -86,17 +93,19 @@
                 <artifactId>lombok</artifactId>
                 <version>1.18.10</version>
             </dependency>
+            <!--      swagger依赖      -->
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger2</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.springfox</groupId>
+                <artifactId>springfox-swagger-ui</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <build>
-        <plugins>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-            </plugin>
-        </plugins>
-    </build>
 
     <repositories>
         <repository>
