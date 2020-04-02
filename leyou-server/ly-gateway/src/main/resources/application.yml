@@ -16,6 +16,8 @@ eureka:
 
 zuul:
   prefix: /api # 添加路由前缀
+  add-host-header: true # 添加Host头生效
+  sensitive-headers:  #敏感头过滤，设置为空，意为不过滤敏感头
   routes:      # 配置路由
     item-service: /item/**
     search-service: /search/**
@@ -39,4 +41,18 @@ hystrix:
         isolation:
           thread:
             timeoutInMillisecond: 5000 # 熔断超时时长：5000ms
+
+ly:
+  jwt:
+    secret: 123456                      # 加密的secret
+    publicKeyPath: E:\Key\rsa.pub       # 公钥的路径
+    cookieName: t                       # token的cookie名称
+  filter:
+    allowPaths:
+      - /api/auth
+      - /api/search
+      - /api/user/register
+      - /api/user/check
+      - /api/user/code
+      - /api/item
 

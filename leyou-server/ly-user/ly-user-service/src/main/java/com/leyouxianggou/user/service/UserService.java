@@ -8,4 +8,6 @@ public interface UserService {
     void register(User user,String code);
 
     void verifyPhoneNum(String phoneNum);
+
+    User queryUserByUsernameAndPassword(String userName, String password);
 }

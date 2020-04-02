@@ -38,7 +38,15 @@ public enum ExceptionEnum {
     GOODS_SPU_UPDATE_ERROR(500,"商品SPU更新失败"),
     GOODS_SPU_DETAIL_UPDATE_ERROR(500,"商品SPU Detail更新失败"),
 
-    UNDEFINED_DATA_TYPE(404,"未定义的数据类型");
+    UNDEFINED_DATA_TYPE(404,"未定义的数据类型"),
+
+    INVALID_VERIFY_CODE(500,"无效的验证码"),
+
+    INVALID_USERNAME_PASSWORD(404,"无效的用户名和密码"),
+    USER_NOT_FOUND(404,"未查询到用户信息"),
+    UNAUTHORIZED(403,"无操作权限"),
+    INVALID_TOKEN(500,"无效的Token")
+    ;
     ;
     private Integer code;
     private String msg;

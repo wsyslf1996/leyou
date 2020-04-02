@@ -43,7 +43,7 @@
                     <div class="controls">
                         <input type="text" placeholder="请输入你的用户名" class="input-xfat input-xlarge"
                                v-model.lazy="user.username" name="username" data-vv-as="用户名"
-                               v-validate="'required|alpha_dash|min:4|max:30|useful:1'">
+                               v-validate="'required|alpha_dash|min:6|max:24|useful:1'">
                     </div>
                     <span style="color: red;">{{ errors.first('username') }}</span>
                 </div>
@@ -96,7 +96,7 @@
                 <div class="control-group">
                     <label class="control-label"></label>
                     <div class="controls btn-reg">
-                        <a class="sui-btn btn-block btn-xlarge btn-danger" href="javascript:void(0)" target="_blank"
+                        <a class="sui-btn btn-block btn-xlarge btn-danger" href="javascript:void(0)"
                            @click.stop="submit"
                         >完成注册</a>
                     </div>

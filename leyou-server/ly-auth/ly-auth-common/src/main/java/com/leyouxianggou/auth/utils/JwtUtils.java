@@ -17,9 +17,9 @@ public class JwtUtils {
     public static String generateToken(UserInfo userInfo, PrivateKey privateKey, int expireMinutes) {
         return Jwts.builder()
                 .claim(JwtConstants.JWT_KEY_ID, userInfo.getId()) //添加数据
-                .claim(JwtConstants.JWT_KEY_USER_NAME, userInfo.getName()) //添加数据
+                .claim(JwtConstants.JWT_KEY_USER_NAME, userInfo.getUsername()) //添加数据
                 .setExpiration(DateTime.now().plusMinutes(expireMinutes).toDate()) //这里设置的Token的时间是expireMinutes分钟
-                .signWith(SignatureAlgorithm.RS256, privateKey) //签名(用RSA256加密)
+                .signWith(SignatureAlgorithm.RS256, privateKey) //签名(底层采用SHA256算法)
                 .compact();
     }
 
@@ -34,9 +34,9 @@ public class JwtUtils {
     public static String generateToken(UserInfo userInfo, byte[] privateKey, int expireMinutes) throws Exception {
         return Jwts.builder()
                 .claim(JwtConstants.JWT_KEY_ID, userInfo.getId())
-                .claim(JwtConstants.JWT_KEY_USER_NAME, userInfo.getName())
-                .setExpiration(DateTime.now().plus(expireMinutes).toDate())
-                .signWith(SignatureAlgorithm.ES256, RsaUtils.getPrivateKey(privateKey))
+                .claim(JwtConstants.JWT_KEY_USER_NAME, userInfo.getUsername())
+                .setExpiration(DateTime.now().plus(expireMinutes).toDate()) // 设置过期时间
+                .signWith(SignatureAlgorithm.ES256, RsaUtils.getPrivateKey(privateKey)) // 签名算法，签名内容
                 .compact();
     }
 

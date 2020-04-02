@@ -19,7 +19,7 @@ public class RsaUtils {
      */
     public static PublicKey getPublicKey(String fileName) throws Exception {
         byte[] bytes = readFile(fileName);
-        return getPublicKey(Base64.getDecoder().decode(bytes));
+        return getPublicKey(bytes);
     }
 
     /**
@@ -30,7 +30,7 @@ public class RsaUtils {
      */
     public static PrivateKey getPrivateKey(String fileName) throws Exception{
         byte[] bytes = readFile(fileName);
-        return getPrivateKey(Base64.getDecoder().decode(bytes));
+        return getPrivateKey(bytes);
     }
 
     /**
@@ -67,7 +67,7 @@ public class RsaUtils {
      * @throws IOException
      */
     public static byte[] readFile(String fileName) throws IOException {
-        return Files.readAllBytes(new File(fileName).toPath());
+        return Base64.getDecoder().decode(Files.readAllBytes(new File(fileName).toPath()));
     }
 
     /**
@@ -84,12 +84,12 @@ public class RsaUtils {
         SecureRandom secureRandom = new SecureRandom(secret.getBytes()); // 加密混淆的salt值
         keyPairGenerator.initialize(1024, secureRandom);
         KeyPair keyPair = keyPairGenerator.genKeyPair();
-        // 获取公钥并写出
-        byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
-        writeFile(publicKeyFilename, publicKeyBytes);
         // 获取私钥并写出
         byte[] privateKeyBytes = keyPair.getPrivate().getEncoded();
         writeFile(privateKeyFilename, privateKeyBytes);
+        // 获取公钥并写出
+        byte[] publicKeyBytes = keyPair.getPublic().getEncoded();
+        writeFile(publicKeyFilename, publicKeyBytes);
     }
 
     /**

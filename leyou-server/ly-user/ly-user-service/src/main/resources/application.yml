@@ -22,6 +22,10 @@ spring:
       exchange: leyou.sms.exchange
     publisher-confirms: true
 
+  # Redis配置
+  redis:
+    host: 192.168.116.128 #设置Redis服务器的IP
+
 eureka:
   client:
     service-url:
@@ -29,7 +33,7 @@ eureka:
   instance:
     prefer-ip-address: true
     ip-address: 192.168.116.1
-    instance-id: ${eureka.instance.ip-address}.${server.port}
+    instance-id: ${spring.application.name}.${server.port}
     lease-renewal-interval-in-seconds: 5  # 心跳检测频率 测试专用
     lease-expiration-duration-in-seconds: 15 # 失效扫描 测试专用
 
