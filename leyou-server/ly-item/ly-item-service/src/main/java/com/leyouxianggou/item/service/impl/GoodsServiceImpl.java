@@ -197,20 +197,35 @@ public class GoodsServiceImpl implements GoodsService {
         // 查询Sku
         Sku sku = new Sku();
         sku.setSpuId(spuId);
-        List<Sku> skus = skuMapper.select(sku);
-        if(CollectionUtils.isEmpty(skus)){
+        List<Sku> skuList = skuMapper.select(sku);
+        if(CollectionUtils.isEmpty(skuList)){
             throw new LyException(ExceptionEnum.GOODS_SKU_NOT_FOUND);
         }
-
         // 查询库存
-        for(Sku sku1:skus){
-            Stock stock = stockMapper.selectByPrimaryKey(sku1.getId());
+        setSkusStock(skuList);
+        return skuList;
+    }
+
+    @Override
+    public List<Sku> querySkuListByIds(List<Long> ids) {
+        // 查询SkuList
+        List<Sku> skuList = skuMapper.selectByIdList(ids);
+        if(CollectionUtils.isEmpty(skuList)){
+            throw new LyException(ExceptionEnum.GOODS_SKU_NOT_FOUND);
+        }
+        // 查询并设置每个Sku库存
+        setSkusStock(skuList);
+        return skuList;
+    }
+
+    private void setSkusStock(List<Sku> skus){
+        for(Sku sku:skus){
+            Stock stock = stockMapper.selectByPrimaryKey(sku.getId());
             if(stock == null){
                 throw new LyException(ExceptionEnum.GOODS_STOCK_NOT_FOUND);
             }
-            sku1.setStock(stock.getStock());
+            sku.setStock(stock.getStock());
         }
-        return skus;
     }
 
     private void insertStockAndSkuBySpu(Spu spu){

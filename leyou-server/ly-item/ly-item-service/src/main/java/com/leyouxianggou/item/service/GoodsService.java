@@ -18,6 +18,8 @@ public interface GoodsService {
 
     List<Sku> querySkuListBySpuID(Long spuId);
 
+    List<Sku> querySkuListByIds(List<Long> ids);
+
     void updateGoods(Spu spu);
 
     void onShelves(Long spuId);
@@ -25,4 +27,5 @@ public interface GoodsService {
     void offShelves(Long spuId);
 
     void deleteGoods(Long spuId);
+
 }

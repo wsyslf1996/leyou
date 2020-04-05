@@ -64,6 +64,11 @@ public class GoodsController {
         return ResponseEntity.ok(goodsService.querySkuListBySpuID(spuId));
     }
 
+    @GetMapping("/sku/list/ids")
+    public ResponseEntity<List<Sku>> querySkuListByIds(@RequestParam("ids") List<Long> ids){
+        return ResponseEntity.ok(goodsService.querySkuListByIds(ids));
+    }
+
     @PostMapping("/spu/onshelves")
     public ResponseEntity<Void> onShelves(@RequestParam("spuId")Long spuId){
         goodsService.onShelves(spuId);

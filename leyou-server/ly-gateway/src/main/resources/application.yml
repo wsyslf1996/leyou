@@ -27,6 +27,7 @@ zuul:
       strip-prefix: false #保留前缀
     user-service: /user/**
     auth-service: /auth/**
+    cart-service: /cart/**
 
 ribbon:
   ConnectTimeout: 250 # 连接超时时间(ms)
@@ -44,11 +45,10 @@ hystrix:
 
 ly:
   jwt:
-    secret: 123456                      # 加密的secret
     publicKeyPath: E:\Key\rsa.pub       # 公钥的路径
     cookieName: t                       # token的cookie名称
   filter:
-    allowPaths:
+    allowPaths: #设置请求过滤白名单
       - /api/auth
       - /api/search
       - /api/user/register

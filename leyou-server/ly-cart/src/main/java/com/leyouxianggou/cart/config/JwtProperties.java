@@ -1,4 +1,4 @@
-package com.leyouxianggou.gateway.config;
+package com.leyouxianggou.cart.config;
 
 import com.leyouxianggou.auth.utils.RsaUtils;
 import lombok.Data;

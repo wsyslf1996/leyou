@@ -1,21 +1,11 @@
 server:
-  port: 8085
+  port: 8088
 
 spring:
   application:
-    name: sms-service
-
-  #设置Redis服务器的IP
+    name: cart-service
   redis:
     host: 192.168.116.128
-
-  # RabbitMQ配置
-  rabbitmq:
-    host: 192.168.116.128
-    username: wsyslf1996
-    password: 61196202e
-    virtual-host: /leyou
-    publisher-confirms: true
 
 eureka:
   client:
@@ -28,4 +18,7 @@ eureka:
     lease-renewal-interval-in-seconds: 5  # 心跳检测频率 测试专用
     lease-expiration-duration-in-seconds: 15 # 失效扫描 测试专用
 
-
+ly:
+  jwt:
+    publicKeyPath: E:\Key\rsa.pub       # 公钥的路径
+    cookieName: t
