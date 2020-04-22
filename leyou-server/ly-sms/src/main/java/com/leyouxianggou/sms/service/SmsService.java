@@ -1,7 +1,10 @@
 package com.leyouxianggou.sms.service;
 
-public interface SmsService {
-    void sendMessage(String phoneNum,String verifyCode);
+import java.util.Map;
 
-    void sendMessage(String phoneNum);
+public interface SmsService {
+
+    void sendVerifyMessage(String phoneNum,String verifyCode);
+
+    void sendVerifyMessage(String phoneNum);
 }

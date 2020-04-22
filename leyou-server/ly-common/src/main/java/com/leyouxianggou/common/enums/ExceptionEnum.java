@@ -45,8 +45,13 @@ public enum ExceptionEnum {
     INVALID_USERNAME_PASSWORD(404,"无效的用户名和密码"),
     USER_NOT_FOUND(404,"未查询到用户信息"),
     UNAUTHORIZED(403,"无操作权限"),
-    INVALID_TOKEN(500,"无效的Token")
-    ;
+    INVALID_TOKEN(500,"无效的Token"),
+
+    RECEIVER_NOT_FOUND(404,"收件人信息未查询到"),
+    RECEIVER_INSERT_ERROR(500,"新增收件人信息失败"),
+    RECEIVER_UPDATE_ERROR(500,"修改收件人信息失败"),
+    RECEIVER_DELETE_ERROR(500,"删除收件人信息失败")
+
     ;
     private Integer code;
     private String msg;

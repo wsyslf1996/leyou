@@ -37,5 +37,13 @@ eureka:
     lease-renewal-interval-in-seconds: 5  # 心跳检测频率 测试专用
     lease-expiration-duration-in-seconds: 15 # 失效扫描 测试专用
 
+ly:
+  jwt:
+    publicKeyPath: E:\Key\rsa.pub       # 公钥的路径
+    cookieName: t
+  filter:
+    authFilterPath:
+      - /receiver
+
 
 

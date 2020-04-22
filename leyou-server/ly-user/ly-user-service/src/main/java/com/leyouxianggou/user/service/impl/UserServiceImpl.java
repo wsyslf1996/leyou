@@ -89,7 +89,8 @@ public class UserServiceImpl implements UserService {
         }
         // 校验密码
         if(!StringUtils.equals(result.getPassword(),CodecUtils.md5Hex(password,result.getSalt()))){
-            throw new LyException(ExceptionEnum.USER_NOT_FOUND);
+            LyException lyException = new LyException(ExceptionEnum.USER_NOT_FOUND);
+            throw lyException;
         }
         return result;
     }

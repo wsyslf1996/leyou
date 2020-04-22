@@ -16,10 +16,22 @@
 	<body>
 		<!--head-->
 		
-		<!--页面顶部白条条，由js动态加载-->
-		<script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
-		<div class="top"></div>
-    	<script type="text/javascript">$(".top").load("shortcut.html");</script>
+		<!-- 头部栏位 -->
+		<div id="nav-bottom">
+			<ly-top/>
+		</div>
+		<!--页面顶部，由js动态加载-->
+		<script src="./js/vue/vue.js"></script>
+		<script src="./js/axios.min.js"></script>
+		<script src="./js/common.js"></script>
+		<script type="text/javascript">
+			var indexVm = new Vue({
+				el:"#nav-bottom",
+				components:{
+					lyTop:() => import('./js/pages/top.js')
+				}
+			});
+		</script>
 		
 		<div class="cart py-container">
 			<!--logoArea-->
@@ -51,7 +63,6 @@
 <script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery.easing/jquery.easing.min.js"></script>
 <script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
-<script type="text/javascript" src="components/ui-modules/nav/nav-portal-top.js"></script>
 </body>
 
 </html>

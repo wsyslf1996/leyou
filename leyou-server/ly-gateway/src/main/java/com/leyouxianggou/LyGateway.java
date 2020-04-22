@@ -1,4 +1,4 @@
-package com.leyouxianggou.gateway;
+package com.leyouxianggou;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.cloud.client.SpringCloudApplication;

@@ -31,6 +31,15 @@ public class CartController {
     }
 
     /**
+     * 查询购物车商品数量
+     * @return
+     */
+    @GetMapping("/itemnums")
+    public ResponseEntity<Integer> queryCartItemNums(){
+        return ResponseEntity.ok(cartService.queryCartItemList().size());
+    }
+
+    /**
      * 修改购物车商品
      */
     @PutMapping
@@ -40,6 +49,11 @@ public class CartController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
+    /**
+     * 删除购物车商品
+     * @param skuId
+     * @return
+     */
     @DeleteMapping("/{skuId}")
     public ResponseEntity<Void> deleteCartItem(@PathVariable("skuId") Long skuId){
         cartService.deleteCartItem(skuId);

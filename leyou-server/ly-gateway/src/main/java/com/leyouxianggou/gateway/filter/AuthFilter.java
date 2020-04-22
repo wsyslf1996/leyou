@@ -69,7 +69,7 @@ public class AuthFilter extends ZuulFilter {
             // 解析通过说明token是正确的
             UserInfo userInfo = JwtUtils.getUserInfo(jwtProperties.getPublicKey(), token);
             // TODO 校验权限
-
+            String host = request.getHeader("host");
         }catch (Exception e){
             ctx.setSendZuulResponse(false);
             ctx.setResponseStatusCode(HttpStatus.SC_FORBIDDEN);

@@ -1,4 +1,4 @@
-package com.leyouxianggou.registry;
+package com.leyouxianggou;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

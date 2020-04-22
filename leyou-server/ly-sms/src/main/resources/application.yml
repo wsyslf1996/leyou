@@ -28,4 +28,12 @@ eureka:
     lease-renewal-interval-in-seconds: 5  # 心跳检测频率 测试专用
     lease-expiration-duration-in-seconds: 15 # 失效扫描 测试专用
 
+ly:
+  sms:
+    accessKeyId: LTAI4G1XHBpBQ1cN7TxrUcUF           # 自己的accessKeyId
+    accessKeySecret: ySZlL8rwvMAK87Mymzm2hlYQJLxSbH # 自己的AccessKeySecret
+    signName: 乐优毕设                               # 签名名称
+    verifyCodeTemplate: SMS_187939790               # 验证码模板名称
+
+
 
