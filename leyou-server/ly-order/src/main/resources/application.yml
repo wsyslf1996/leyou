@@ -1,0 +1,49 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: order-service
+
+  # 数据库配置
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://121.41.17.189:3306/leyou
+    username: root
+    password: 123456
+
+  # Redis配置
+  redis:
+    host: 192.168.116.128 #设置Redis服务器的IP
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:10086/eureka
+  instance:
+    prefer-ip-address: true
+    ip-address: 192.168.116.1
+    instance-id: ${spring.application.name}.${server.port}
+    lease-renewal-interval-in-seconds: 5  # 心跳检测频率 测试专用
+    lease-expiration-duration-in-seconds: 15 # 失效扫描 测试专用
+
+ly:
+  jwt:
+    publicKeyPath: E:\Key\rsa.pub       # 公钥的路径
+    cookieName: t
+  idworker:
+    workerId: 1
+    datacenterId: 1
+  alipay:
+    app_id: 2016101700710862
+    merchant_private_key: MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCnk22dPOaJ2EPOA1CAw9zKT6DvK3AGYLP9fb+4nE9whtuyYeI8xwRNJmJJNoAxfRMXEl0ozVeS1Y1nT93vQO3Xptj1OD/8RFQ+Oi80u1s8pKntjUO+V029QI0e23IYWDfNIz93is9hqEwClqspEKIjJjG03jBLs+SEKOKgncvmy/lU1FF+w5mYQ8ttKJKtrmMUzOeQtzkO7HxJOrnWwEF5HVh5CeXoLpTGisYzLEU/ehwmdoQXfCxm4gVrdhyG7pGshhRpoZWhihQ0Rvn/i0K1c2Jk68B918Dw25yNFdAu7sltlpKvBteKsXJnK3egp39R/1Ler0nLQK5oONoRvm3lAgMBAAECggEAHyOEEN3KMP8gyl1PTj4W/vkA/LBjpqu9hnMhdxqEoHJOzLznn0eUAwoI5XXdKFUHgRgGe5h8l2pbVkE/CkBUcegtFJQZP7Uquk1xjCjscT5f3SaM2ge7CFnAX2WDtAZgiBvupTYEBy+QwEJjF8RhfIqSXfuTmd2Zrv0x74qi4wXjGNYLVPaPqg4A3rFMoyxdGh79OPwhcmpJcIBB+b7G0/0ezyuu1zFJxR4yUexxLVxoqzIpef/yuggtBhShkgWNi3I2yRntlFAoLD+BSXGBKn76UdwC9PtkCmqjEGish+qxcGoPKL4HIoyIch/spefCf3CaYIVOepA6t8HJ6J52QQKBgQDSWOtuv1CYfXRO0EZOedmydAVIXrkLlQLj/BgqKmZzX1llx0shd8w97bgWOJbXdbfxplyRrUFgRFhThhgh80MEELiagZKlHc+JmCoDwgEXhbU6CEH9+Wsb80bgHwKq1t7MxpzUGjpsL6F5yGBS6mlQpY76sdReNQaMnv42wmVnLQKBgQDL8hb2G8cpSPBNjVMKNxbRXo9h0CFby9FhljZPucnr+iZwJQROZ+OEab77JjVWX9GYXfyrvLrt5VimifkKdJOjyUxbcI6cIQ8p8cL1IJj0fQ6Rnr9v1v1VyRjYnm4F7Ok8nlNDVhZgKP8BxZdqC18X8fRyjfswNCr4NK4t4A1UmQKBgHet8AZLA+g/OPW+usHbwmkuafMLMe3NEp/0xyr2hOQP1CV8htq79pEluB+sguaEK+xp4zFfilrjh/29xe1LI04k1WPTZURc+cAnu3/32fcwNDSYjjOavb5hZGoQOsxJBOst9f0YDzWOxCkuQN/sT497IyawF0yijt9jdvBhGqDhAoGAUU7i+Jt6e2so4sJFKP1ti2s3nrdrlT1c7JsGbCKV7g585JjdbqTcgB3olhhVi2oIFcbixVUo8U9OWJcJQrHXaqUGXC4zrOtBMGfCYhfs4ww4krXHfL8poNnbngELvDEHi7NTXrUjlpLBl+M+ynheIR3FZyZTzpP9zZazGncI2YECgYBDQLU2VmW/C1wXzliq8fYuVQhZirrXo/qQPA2jqV9WVYGPuMhWBhwbxPznMNpkrDYprMGrH73RNVH5P9GvJ4X+4KQwtHqPFxzd6DMESs0YQ0kZGSLveR0vMlQAvOXtJPi7E0aanS4aEM1SGp2SDHo2ODqt0BlDarqH0BRI/KRORg==
+    alipay_public_key: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA2ySm7Hcn3jYkM1SHwbleL3zZ0bDEuTzVssf9Y2FiWacfnmpvBLZLeQ3ItDcmNSqpH6m0/BA8/MtlZanDzD7G5LBKpeKwMTVBzwu/3JY3i3Ut6l5781dMEvVyBllJHgApsGWsSOHm2nmD+GXo40N93XCoCDbSR1QqPIG4p58Bq5m9M0mrQY/wAsqbBQRDha5iWs5IGgg8KoKolP1dIEhOidXfgN5zlKRLiXZXTi2tyWwcmm1irqBELQOmIPhf1SWMuQHMtYIG+zEOhe2WJtNWuUqLQbiTAhUalIiTPRTY/0u4Uw6bmew1sTkMrqRUty75zXrFvJXcmUVvq4FZa7S4FwIDAQAB
+    notify_url: http://26265635xr.wicp.vip/notify
+    return_url: http://leyou.qicp.vip/forward-pay-success.html
+    sign_type: RSA2
+    charset: utf-8
+    gatewayUrl: https://openapi.alipaydev.com/gateway.do
+
+
+
+

@@ -297,4 +297,21 @@ public class GoodsServiceImpl implements GoodsService {
         // 向mq 发送消息
         amqpTemplate.convertAndSend(LYMQRoutingKey.ITEM_OFF_SHELVES,spuId);
     }
+
+    /**
+     * 减少库存
+     * @param carts
+     */
+    @Override
+    @Transactional
+    public void decreaseStock(List<CartDTO> carts) {
+        for (CartDTO cart : carts) {
+            System.out.println("执行减库存");
+            int count = stockMapper.decreaseStock(cart.getSkuId(), cart.getNum());
+            if(count!=1){
+                log.error("商品:"+cart.getSkuId()+"库存不足！");
+                throw new LyException(ExceptionEnum.GOODS_STOCK_NOT_ENOUGH);
+            }
+        }
+    }
 }

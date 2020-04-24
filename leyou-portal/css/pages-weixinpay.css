@@ -221,7 +221,8 @@ ul.send-detail li {
 .weixin {
 	line-height: 27px;
 	margin-right: 40px;
-	font-size: 16px
+	font-size: 16px;
+	font-weight: bolder;
 }
 
 .checkout-steps {
@@ -242,15 +243,21 @@ ul.send-detail li {
 	color: red
 }
 
+.checkout-steps .timer{
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: larger;
+}
+
 .checkout-steps .saosao {
-	background: url(../img/_/icon-red.png) 50px 8px no-repeat #ff7674;
+	/*background: url(../img/_/icon-red.png) 50px 8px no-repeat #ff7674;*/
 	margin-top: 15px;
 	padding: 8px 0 8px 125px
 }
 
 .checkout-steps .saosao p {
 	margin-bottom: 5px;
-	color: #fff;
+	color: #000000;
 	line-height: 20px;
 	margin-top: 0;
 	font-size: 15px

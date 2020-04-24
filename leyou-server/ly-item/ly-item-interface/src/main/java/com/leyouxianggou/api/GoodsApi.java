@@ -1,13 +1,11 @@
 package com.leyouxianggou.api;
 
 import com.leyouxianggou.common.vo.PageResult;
+import com.leyouxianggou.item.CartDTO;
 import com.leyouxianggou.item.Sku;
 import com.leyouxianggou.item.Spu;
 import com.leyouxianggou.item.SpuDetail;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -24,6 +22,12 @@ public interface GoodsApi {
     @GetMapping("/sku/list")
     List<Sku> querySkuListBySpuID(@RequestParam("id")Long spuId);
 
+    @GetMapping("/sku/list/ids")
+    List<Sku> querySkuListByIds(@RequestParam("ids") List<Long> ids);
+
     @GetMapping("/spu/detail/{id}")
     SpuDetail queryDetailById(@PathVariable("id")Long spuId);
+
+    @PostMapping("/stock/decrease")
+    void decreaseStock(@RequestBody List<CartDTO> carts);
 }

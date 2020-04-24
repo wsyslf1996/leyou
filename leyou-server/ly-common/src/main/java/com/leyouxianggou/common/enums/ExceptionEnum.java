@@ -32,6 +32,7 @@ public enum ExceptionEnum {
 
     GOODS_SKU_NOT_FOUND(404,"商品SKU未查询到"),
     GOODS_STOCK_NOT_FOUND(404,"商品库存未查询到"),
+    GOODS_STOCK_NOT_ENOUGH(500,"商品库存不足"),
 
     GOODS_SPU_NOT_FOUND(404,"商品SPU信息未查询到"),
     GOODS_INSERT_ERROR(500,"新增商品失败"),
@@ -50,7 +51,11 @@ public enum ExceptionEnum {
     RECEIVER_NOT_FOUND(404,"收件人信息未查询到"),
     RECEIVER_INSERT_ERROR(500,"新增收件人信息失败"),
     RECEIVER_UPDATE_ERROR(500,"修改收件人信息失败"),
-    RECEIVER_DELETE_ERROR(500,"删除收件人信息失败")
+    RECEIVER_DELETE_ERROR(500,"删除收件人信息失败"),
+
+    ORDER_CREATE_FAILED(500,"订单创建失败"),
+    ORDER_NOT_EXIST(404,"订单不存在"),
+    ORDER_LOST(500,"数据库订单丢失")
 
     ;
     private Integer code;

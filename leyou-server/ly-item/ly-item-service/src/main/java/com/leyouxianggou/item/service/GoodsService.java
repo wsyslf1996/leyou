@@ -1,6 +1,7 @@
 package com.leyouxianggou.item.service;
 
 import com.leyouxianggou.common.vo.PageResult;
+import com.leyouxianggou.item.CartDTO;
 import com.leyouxianggou.item.Sku;
 import com.leyouxianggou.item.Spu;
 import com.leyouxianggou.item.SpuDetail;
@@ -28,4 +29,5 @@ public interface GoodsService {
 
     void deleteGoods(Long spuId);
 
+    void decreaseStock(List<CartDTO> carts);
 }

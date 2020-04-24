@@ -7,6 +7,8 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+import java.util.Arrays;
+
 
 @Configuration
 @EnableConfigurationProperties(JwtProperties.class)
@@ -17,6 +19,6 @@ public class WebMvcConfig implements WebMvcConfigurer {
 
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new UserInterceptor(jwtProperties)).addPathPatterns("/**");
+        registry.addInterceptor(new UserInterceptor(jwtProperties)).addPathPatterns(Arrays.asList("/business/**","/pay/**"));
     }
 }

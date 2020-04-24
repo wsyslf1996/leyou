@@ -1,6 +1,7 @@
 package com.leyouxianggou.item.controller;
 
 import com.leyouxianggou.common.vo.PageResult;
+import com.leyouxianggou.item.CartDTO;
 import com.leyouxianggou.item.Sku;
 import com.leyouxianggou.item.Spu;
 import com.leyouxianggou.item.SpuDetail;
@@ -78,6 +79,12 @@ public class GoodsController {
     @PostMapping("/spu/offshelves")
     public ResponseEntity<Void> offShelves(@RequestParam("spuId")Long spuId){
         goodsService.offShelves(spuId);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
+
+    @PostMapping("/stock/decrease")
+    public ResponseEntity<Void> decreaseStock(@RequestBody List<CartDTO> carts){
+        goodsService.decreaseStock(carts);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 

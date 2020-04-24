@@ -24,14 +24,19 @@ zuul:
     upload-service:
       path: /upload/**
       serviceId: upload-service
-      strip-prefix: false #保留前缀
+      strip-prefix: false #是否去除前缀前缀？否
     user-service: /user/**
     auth-service: /auth/**
     cart-service: /cart/**
+    order-service: /order/**
+
+  host:
+    connect-timeout-millis: 15000 #HTTP连接超时要比Hystrix的大
+    socket-timeout-millis: 60000 #socket超时
 
 ribbon:
-  ConnectTimeout: 250 # 连接超时时间(ms)
-  ReadTimeout: 2000 # 通信超时时间(ms)
+  ConnectTimeout: 5000 # 连接超时时间(ms)
+  ReadTimeout: 10000 # 通信超时时间(ms)
   MaxAutoRetriesNextServer: 0 # 同一服务不同实例的重试次数
   MaxAutoRetries: 0 # 同一实例的重试次数
 
