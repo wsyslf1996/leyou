@@ -13,8 +13,8 @@ spring:
     default-property-inclusion: non_null # 解决返回model中有null值的属性，有null则不返回
   rabbitmq:
     host: 192.168.116.128
-    username: wsyslf1996
-    password: 61196202e
+    username: root
+    password: 123456
     virtual-host: /leyou
 
 eureka:
