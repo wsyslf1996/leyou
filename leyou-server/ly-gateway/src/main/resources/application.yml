@@ -60,4 +60,5 @@ ly:
       - /api/user/check
       - /api/user/verifycode
       - /api/item
+      - /zuul/api/upload
 

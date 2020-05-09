@@ -40,24 +40,25 @@ const router = new Router({
 
 export default router
 
-// router.beforeEach((to, from, next) => {
-//   if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
-//     if (sessionStorage.getItem("t") == 'true') { // 判断本地是否存在token
-//       console.log("我登录了");
-//       next()
-//     } else {
-//       // 未登录,跳转到登陆页面
-//       console.log("未登录");
-//       next({
-//         path: '/login'
-//       })
-//     }
-//   } else {
-//     console.log("不要求登录");
-//     if(sessionStorage.getItem("t") == 'true'){
-//       next();
-//     }else{
-//       next();
-//     }
-//   }
-// });
+router.beforeEach((to, from, next) => {
+  if (to.meta.requireAuth) { // 判断该路由是否需要登录权限
+    if (sessionStorage.getItem("t") == 'true') { // 判断本地是否存在token
+      console.log("我登录了");
+      next()
+    } else {
+      // 未登录,跳转到登陆页面
+      console.log("未登录");
+      next({
+        path: '/login'
+      })
+    }
+  } else {
+    console.log("不要求登录");
+    next();
+    // if(sessionStorage.getItem("t") == 'true'){
+    //   next();
+    // }else{
+    //   next();
+    // }
+  }
+});

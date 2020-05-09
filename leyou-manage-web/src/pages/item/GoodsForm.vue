@@ -219,7 +219,9 @@ export default {
       this.$http({
         method: this.isEdit ? "put" : "post",
         url: "/item/goods",
-        data: goodsParams
+        data: goodsParams,
+          timeout:5000,
+          // async:false
       })
         .then(() => {
           // 成功，关闭窗口

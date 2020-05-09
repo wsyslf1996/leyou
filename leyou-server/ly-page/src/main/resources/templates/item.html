@@ -160,7 +160,7 @@
                             <div class="fl price">
                                 <i>¥</i><em v-text="ly.formatPrice(sku.price)"></em><span>降价通知</span>
                             </div>
-                            <div class="fr remark"><i>累计评价</i><em>612188</em></div>
+                            <div class="fr remark"><i>累计评价</i><em>999999</em></div>
                         </div>
                         <div class="summary-wrap">
                             <div class="fl title">
@@ -682,28 +682,8 @@
                         alert("添加购物车失败，请重试！");
                     })
                 }).catch(() => {
-                    // 获取以前的购物车
-                    const carts = ly.store.get("carts") || [];
-                    // 获取与当前商品id一致的购物车数据
-                    const cart = carts.find(c => c.skuId === this.sku.id);
-                    if (cart) {
-                        // 存在，修改数量
-                        cart.num += this.num;
-                    } else {
-                        // 不存在，新增
-                        carts.push({
-                            skuId: this.sku.id,
-                            title: this.sku.title,
-                            image: this.images[0],
-                            price: this.sku.price,
-                            num: this.num,
-                            ownSpec: JSON.stringify(this.ownSpec)
-                        })
-                    }
-                    // 未登录
-                    ly.store.set("carts", carts);
-                    // 跳转到购物车列表页
-                    window.location.href = "http://www.leyou.com/cart.html";
+                    // 跳转到登录页面
+                    window.location.href = "http://www.leyou.com/login.html?returnUrl=" + window.location.href;
                 })
             },
             locked(id, i) {

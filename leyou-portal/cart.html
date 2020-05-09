@@ -99,8 +99,7 @@
                 <div class="toolbar">
                     <div class="chosed">已选择<span v-text="selectedCarts.length"></span>件商品</div>
                     <div class="sumprice">
-                        <span><em>总价（不含运费） ：</em><i class="summoney" v-text="ly.formatPrice(totalPrice)"></i></span>
-                        <span><em>已节省：</em><i>-¥20.00</i></span>
+                        <span><em>总价 ：</em><i class="summoney" v-text="ly.formatPrice(totalPrice)"></i></span>
                     </div>
                     <div class="sumbtn">
                         <a class="sum-btn" href="#" @click.prevent="toOrderInfo" target="_blank">结算</a>
@@ -108,26 +107,6 @@
                 </div>
             </div>
             <div class="clearfix"></div>
-            <div class="deled">
-                <span>已删除商品，您可以重新购买或加关注：</span>
-                <div class="cart-list del">
-                    <ul class="goods-list yui3-g">
-                        <li class="yui3-u-1-2">
-                            <div class="good-item">
-                                <div class="item-msg">Apple Macbook Air 13.3英寸笔记本电脑 银色（Corei5）处理器/8GB内存</div>
-                            </div>
-                        </li>
-                        <li class="yui3-u-1-6"><span class="price">8848.00</span></li>
-                        <li class="yui3-u-1-6">
-                            <span class="number">1</span>
-                        </li>
-                        <li class="yui3-u-1-8">
-                            <a href="#none">重新购买</a>
-                            <a href="#none">移到我的关注</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             <div class="liked">
                 <ul class="sui-nav nav-tabs">
                     <li class="active">
@@ -353,13 +332,7 @@
                 }).catch(() => {
                     // 未登录
                     console.log("未登录")
-                    const carts = ly.store.get("carts");
-                    this.loadSku(carts).then(() => {
-                            this.carts = carts;
-                            this.selectedCarts = this.carts;
-                    }).catch(error => {
-                        console.log(error);
-                    })
+                    window.location.href = "http://www.leyou.com/login.html?returnUrl=" + window.location.href;
                 })
             },
             increment(c) {
@@ -374,7 +347,7 @@
                     })
                 }).catch(() => {
                     // 未登录
-                    ly.store.set("carts", this.carts);
+                    window.location.href = "http://www.leyou.com/login.html?returnUrl=" + window.location.href;
                 })
             },
             decrement(c) {

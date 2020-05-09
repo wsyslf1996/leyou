@@ -54,6 +54,7 @@ export default {
         this.dialog = true;
         return false;
       }
+      sessionStorage.setItem("t","true");
       console.log(this.username + " ... " + this.password);
       this.$router.push("/");
     }

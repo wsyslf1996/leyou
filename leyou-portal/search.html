@@ -233,7 +233,7 @@
                             <li class="dotted" v-show="this.totalPage>5 && this.search.page>3"><span>...</span></li>
                             <li :class="{active:index(i) === search.page}" v-for="i in (this.totalPage<5 ? this.totalPage: 5)"
                                 :key="i">
-                                <a href="#" v-text="index(i)"></a>
+                                <a v-text="index(i)" @click.prevent="search.page=index(i)"></a>
                             </li>
                             <li class="dotted" v-show="this.search.page<this.totalPage-2"><span>...</span></li>
                             <li :class="{next:true,disabled:this.search.page>=this.totalPage}"

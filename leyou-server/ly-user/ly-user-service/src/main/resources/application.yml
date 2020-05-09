@@ -12,6 +12,20 @@ spring:
     username: root
     password: 123456
 
+  # RabbitMQ配置
+  rabbitmq:
+    host: 192.168.116.128
+    username: root
+    password: 123456
+    virtual-host: /leyou
+    template:
+      exchange: leyou.sms.exchange
+    publisher-confirms: true
+
+  # Redis配置
+  redis:
+    host: 192.168.116.128 #设置Redis服务器的IP
+
 eureka:
   client:
     service-url:
