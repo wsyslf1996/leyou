@@ -10,7 +10,6 @@
 	<link rel="stylesheet" type="text/css" href="css/webbase.css" />
 	<link rel="stylesheet" type="text/css" href="css/pages-getOrderInfo.css" />
 </head>
-
 <body>
 <!--head-->
 <div id="orderInfoApp">
@@ -78,24 +77,21 @@
 												</div>
 											</div>
 											<div class="control-group">
-												<label class="control-label">省：</label>
+												<label class="control-label">所在地区：</label>
 												<div class="controls">
-													<input type="text" v-model="addressForm.province" class="input-medium">
+													<div data-toggle="distpicker">
+														<div class="form-group area">
+															<select class="form-control input-medium" id="province" v-model="addressForm.province"></select>
+														</div>
+														<div class="form-group area">
+															<select class="form-control input-medium" id="city" v-model="addressForm.city"></select>
+														</div>
+														<div class="form-group area">
+															<select class="form-control input-medium" id="district" v-model="addressForm.district"></select>
+														</div>
+													</div>
 												</div>
 											</div>
-											<div class="control-group">
-												<label class="control-label">市：</label>
-												<div class="controls">
-													<input type="text" v-model="addressForm.city" class="input-medium">
-												</div>
-											</div>
-											<div class="control-group">
-												<label class="control-label">区/县：</label>
-												<div class="controls">
-													<input type="text" v-model="addressForm.district" class="input-medium">
-												</div>
-											</div>
-
 											<div class="control-group">
 												<label class="control-label">邮编：</label>
 												<div class="controls">
@@ -170,7 +166,7 @@
 										<li class="yui3-u-7-12">
 											<div class="desc">{{good.title}}</div>
 											<div class="seven">
-												<span v-for="(v,k) in good.ownSpec" key="k">
+												<span v-for="v in good.ownSpec">
                                                         {{v}}
 												</span>
 											</div>
@@ -289,12 +285,25 @@
 		},
 		methods:{
 			clear(){
-				this.addressForm ={};
+				$("#province").val("—— 省 ——");
+				$("#province").trigger("change");
+				$("#city").val("—— 市 ——");
+				$("#city").trigger("change");
+				$("#district").val("—— 区 ——");
+				$("#district").trigger("change");
+				this.addressForm.phone ='';
+				this.addressForm.zipCode ='';
+				this.addressForm.province ='';
+				this.addressForm.city ='';
+				this.addressForm.district ='';
+				this.addressForm.address ='';
+				this.addressForm.label ='家';
+				this.addressForm.defaultAddress = false;
 				document.getElementById("myform").reset();
 			},
 			addAddress(){
-				this.isEdit = false;
 				this.clear();
+				this.isEdit = false;
 			},
 			addressSave(){
 				//1.验证是否登录
@@ -336,15 +345,18 @@
 				ly.verifyUser().then(() => {
 					ly.http.get("/user/receiver/"+id).then(({data}) => {
 						this.addressForm = data;
+						$("#province").val(this.addressForm.province);
+						$("#province").trigger("change");
+						$("#city").val(this.addressForm.city);
+						$("#city").trigger("change");
+						$("#district").val(this.addressForm.district);
+						$("#district").trigger("change");
 					})
 				}).catch(() => {
 					window.location = "/login.html?returnUrl=" + window.location.href;
 				})
 			},
 			loadData(){
-				// ly.http.get("/user/receiver").then(({data}) => {
-				// 	console.log(data)
-				// })
 				ly.verifyUser().then(() => {
 					//1.已经登录，获取购物车中要下单的信息
 					this.carts = ly.store.get("selectedCarts") || [];
@@ -449,6 +461,11 @@
 <script type="text/javascript" src="js/plugins/jquery.easing/jquery.easing.min.js"></script>
 <script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
 <!--<script type="text/javascript" src="js/pages/getOrderInfo.js"></script>-->
+
+<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+<script type="text/javascript" src="js/plugins/citypicker/distpicker.data.js"></script>
+<script type="text/javascript" src="js/plugins/citypicker/distpicker.js"></script>
+<script type="text/javascript" src="js/pages/main.js"></script>
 </body>
 
 </html>

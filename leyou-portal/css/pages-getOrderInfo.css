@@ -288,3 +288,7 @@ ul.send-detail li {
 .step-tit h5 span a:hover {
 	color: red
 }
+
+.controls .area {
+	display: inline-block
+}

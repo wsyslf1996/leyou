@@ -1,9 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import VueCookies from 'vue-cookies'
 
 Vue.use(Router)
-Vue.use(VueCookies)
 
 function route (path, file, name, children,requireAuth) {
   return {
@@ -55,10 +53,5 @@ router.beforeEach((to, from, next) => {
   } else {
     console.log("不要求登录");
     next();
-    // if(sessionStorage.getItem("t") == 'true'){
-    //   next();
-    // }else{
-    //   next();
-    // }
   }
 });

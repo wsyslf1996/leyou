@@ -32,7 +32,7 @@
     props: {
       oldBrand: {
         type: Object
-      },
+  },
       isEdit: {
         type: Boolean,
         default: false
