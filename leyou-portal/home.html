@@ -16,26 +16,22 @@
 
 <!-- 头部栏位 -->
 <!--页面顶部，由js动态加载-->
-<script type="text/javascript" src="plugins/jquery/jquery.min.js"></script>
-<div id="nav-bottom"></div>
-<script type="text/javascript">$("#nav-bottom").load("top.html");</script>
-
-<script type="text/javascript" src="js/plugins/jquery/jquery.min.js"></script>
+<div id="nav-bottom">
+    <ly-top/>
+</div>
+<!--页面顶部，由js动态加载-->
+<script src="./js/vue/vue.js"></script>
+<script src="./js/axios.min.js"></script>
+<script src="./js/common.js"></script>
 <script type="text/javascript">
-    $(function () {
-        $("#service").hover(function () {
-            $(".service").show();
-        }, function () {
-            $(".service").hide();
-        });
-        $("#shopcar").hover(function () {
-            $("#shopcarlist").show();
-        }, function () {
-            $("#shopcarlist").hide();
-        });
-
-    })
+    var indexVm = new Vue({
+        el:"#nav-bottom",
+        components:{
+            lyTop:() => import('./js/pages/top.js')
+        }
+    });
 </script>
+
 <script type="text/javascript" src="js/plugins/jquery.easing/jquery.easing.min.js"></script>
 <script type="text/javascript" src="js/plugins/sui/sui.min.js"></script>
 <script type="text/javascript" src="js/plugins/jquery-placeholder/jquery.placeholder.min.js"></script>
