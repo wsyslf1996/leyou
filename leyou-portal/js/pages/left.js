@@ -13,11 +13,11 @@ const lyLeft = {
         <div class='list-items'>\
             <dl>\
                 <dt><i>·</i> 订单中心</dt>\
-                <dd ><a href='home-index.html'  >我的订单</a></dd>\
-                <dd><a href='home-order-pay.html' >待付款</a></dd>\
-                <dd><a href='home-order-send.html'  class='list-active'>待发货</a></dd>\
-                <dd><a href='home-order-receive.html' >待收货</a></dd>\
-                <dd><a href='home-order-evaluate.html'  >待评价</a></dd>\
+                <dd ><a href='home-index.html' key='1-1':class='key===activeindex?list-active:\"\"'>我的订单</a></dd>\
+                <dd><a href='home-order-pay.html' :key='1-2' :class='key===activeindex?list-active:\"\"'>待付款</a></dd>\
+                <dd><a href='home-order-send.html' :key='1-3' :class='key===activeindex?list-active:\"\"'>待发货</a></dd>\
+                <dd><a href='home-order-receive.html' :key='1-4' :class='key===activeindex?list-active:\"\"'>待收货</a></dd>\
+                <dd><a href='home-order-evaluate.html' :key='1-5' :class='key===activeindex?list-active:\"\"'>待评价</a></dd>\
             </dl>\
             <dl>\
                 <dt><i>·</i> 我的中心</dt>\
@@ -46,5 +46,8 @@ const lyLeft = {
     },
     methods: {
     },
+    props:{
+        activeindex: String,
+    }
 }
 export default lyLeft;

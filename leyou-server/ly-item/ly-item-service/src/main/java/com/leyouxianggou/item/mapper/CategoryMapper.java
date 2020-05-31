@@ -16,4 +16,7 @@ public interface CategoryMapper extends Mapper<Category>, IdListMapper<Category,
     @Select("SELECT * from tb_category a WHERE a.id IN (SELECT category_id from tb_category_brand b WHERE b.brand_id = #{bid})")
     List<Category> queryCategoryByBid(@Param("bid") Long bid);
 
+    @Select("SELECT COUNT(*) FROM `tb_category` where parent_id = " +
+            "(SELECT parent_id from `tb_category` where id = #{id})")
+    int queryBrotherCount(Long id);
 }

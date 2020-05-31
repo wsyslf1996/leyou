@@ -93,11 +93,11 @@ public class SmsServiceImpl implements SmsService {
         }
 
         // TODO 给手机发送验证码
-//        Map<String, Object> params = new HashMap<>();
-//        params.put("code",verifyCode);
-//        sendMessage(smsProperties.getVerifyCodeTemplate(),phoneNum,params);
+        Map<String, Object> params = new HashMap<>();
+        params.put("code",verifyCode);
+        sendMessage(smsProperties.getVerifyCodeTemplate(),phoneNum,params);
         // 打印输出手机号验证码
-        System.out.println(phoneNum+"的验证码为:"+verifyCode);
+//        System.out.println(phoneNum+"的验证码为:"+verifyCode);
 
         // 将验证码存入Redis服务器
         map.put("code",verifyCode);

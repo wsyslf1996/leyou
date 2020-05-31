@@ -30,7 +30,7 @@
             <div class="yui3-g home">
                 <!--左侧列表-->
                 <div class="yui3-u-1-6 list">
-                    <ly-left />
+                    <ly-left activeindex="1-1"/>
                 </div>
                 <!--右侧主内容-->
                 <div class="yui3-u-5-6 order-pay">
@@ -361,6 +361,9 @@
         components:{
             lyTop:() => import('./js/pages/top.js'),
             lyLeft:() => import('./js/pages/left.js')
+        },
+        data:{
+
         }
     });
 </script>

@@ -42,7 +42,7 @@ public class SearchDemo {
     public void importData(){
 
         int page = 1;
-        int pageSize = 0;
+        int pageSize = 100;
         int size = 0 ;
         List<Goods> goodsList = new ArrayList<>();
         do{
@@ -56,5 +56,10 @@ public class SearchDemo {
             page++;
         }while (size==100);
         goodsRepository.saveAll(goodsList);
+    }
+
+    @Test
+    public void deleteIndex(){
+        template.deleteIndex(Goods.class);
     }
 }

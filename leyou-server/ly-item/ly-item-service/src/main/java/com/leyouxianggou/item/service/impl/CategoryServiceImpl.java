@@ -42,6 +42,10 @@ public class CategoryServiceImpl implements CategoryService {
         if(count!=1){
             throw new LyException(ExceptionEnum.CATEGORY_NOT_FOUND);
         }
+        Category parent = new Category();
+        parent.setId(category.getParentId());
+        parent.setIsParent(true);
+        categoryMapper.updateByPrimaryKeySelective(parent);
     }
 
     @Override
@@ -57,6 +61,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public void deleteCategory(Long id) {
+        // 删除当前节点
         categoryMapper.deleteByPrimaryKey(id);
     }
 

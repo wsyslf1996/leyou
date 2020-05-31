@@ -178,7 +178,7 @@ public class AlipayServiceImpl implements AlipayService {
                 orderStatus.setOrderId(orderId);
                 orderStatus.setStatus(OrderStatusEnums.PAYED.value());
                 orderStatus.setPaymentTime(current);
-                orderStatusMapper.updateByPrimaryKey(orderStatus);
+                orderStatusMapper.updateByPrimaryKeySelective(orderStatus);
             }
             return "success";
         }else {//验证失败
