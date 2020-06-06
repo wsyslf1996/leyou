@@ -1,10 +1,13 @@
 package com.leyouxianggou.order.pojo;
 
+import com.leyouxianggou.user.pojo.Receiver;
 import lombok.Data;
 
 import javax.persistence.Column;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import java.util.List;
 
 @Table(name = "tb_order")
 @Data
@@ -35,4 +38,13 @@ public class Order {
     @Column(name = "receiver_id")
     private Long receiverId; // 收件人ID
 
+
+    @Transient
+    private OrderStatus orderStatus;
+
+    @Transient
+    private List<OrderDetail> orderDetails;
+
+    @Transient
+    private Receiver receiver;
 }

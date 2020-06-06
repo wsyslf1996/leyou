@@ -2,16 +2,17 @@ package com.leyouxianggou.order.controller;
 
 import com.alipay.api.AlipayApiException;
 import com.leyouxianggou.order.dto.OrderDTO;
+import com.leyouxianggou.order.pojo.Order;
 import com.leyouxianggou.order.service.AlipayService;
 import com.leyouxianggou.order.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.UnsupportedEncodingException;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -27,6 +28,11 @@ public class OrderController {
     @ResponseBody
     public ResponseEntity<Map<String,String>> createOrder(@RequestBody OrderDTO orderDTO){
         return ResponseEntity.ok(orderService.createOrder(orderDTO));
+    }
+
+    @GetMapping("/business")
+    public ResponseEntity<List<Order>> queryOrder(){
+        return ResponseEntity.ok(orderService.querySelfOrder());
     }
 
     @PostMapping("/pay/{orderId}")

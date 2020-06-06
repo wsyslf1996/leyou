@@ -7,6 +7,7 @@ import com.leyouxianggou.common.utils.IdWorker;
 import com.leyouxianggou.item.Sku;
 import com.leyouxianggou.item.CartDTO;
 import com.leyouxianggou.order.client.GoodsClient;
+import com.leyouxianggou.order.client.ReceiverClient;
 import com.leyouxianggou.order.dto.OrderDTO;
 import com.leyouxianggou.order.enums.OrderStatusEnums;
 import com.leyouxianggou.order.interceptor.UserInterceptor;
@@ -17,6 +18,7 @@ import com.leyouxianggou.order.pojo.Order;
 import com.leyouxianggou.order.pojo.OrderDetail;
 import com.leyouxianggou.order.pojo.OrderStatus;
 import com.leyouxianggou.order.service.OrderService;
+import com.leyouxianggou.user.pojo.Receiver;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,6 +44,9 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     private GoodsClient goodsClient;
+
+    @Autowired
+    private ReceiverClient receiverClient;
 
     @Override
     @Transactional
@@ -119,4 +124,36 @@ public class OrderServiceImpl implements OrderService {
         orderMap.put("orderId",orderID.toString());
         return orderMap;
     }
+
+    @Override
+    public List<Order> querySelfOrder() {
+        UserInfo user = UserInterceptor.getUserInfo();
+        Long uid = user.getId();
+        Order order = new Order();
+        order.setUserId(uid);
+        // 根据用户ID查询所有订单信息
+        List<Order> orderList = orderMapper.select(order);
+
+        // 遍历所有订单封装订单详情（集合）和订单状态
+        orderList.forEach(o -> {
+            // 查询封装订单状态
+            OrderStatus orderStatus = orderStatusMapper.selectByPrimaryKey(o.getOrderId());
+
+            // 构建查询订单详情
+            List<OrderDetail> orderDetailList = new ArrayList<>();
+            OrderDetail od = new OrderDetail();
+            od.setOrderId(o.getOrderId());
+            List<OrderDetail> orderDetails = orderDetailMapper.select(od);
+
+            // 查询联系人
+            Receiver receiver = receiverClient.queryReceiver(o.getReceiverId());
+
+            // 结果参数封装
+            o.setOrderStatus(orderStatus);
+            o.setOrderDetails(orderDetails);
+            o.setReceiver(receiver);
+        });
+        return orderList;
+    }
+
 }

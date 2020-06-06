@@ -90,6 +90,9 @@ const lyTop = {
             ly.http.get("/cart/itemnums").then(resp=>{
                 this.cartNums = resp.data;
             })
+        },
+        getUserInfo(data){
+            console.log(data);
         }
     },
     created() {

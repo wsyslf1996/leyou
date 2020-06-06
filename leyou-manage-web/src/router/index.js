@@ -29,8 +29,7 @@ const router = new Router({
         route("/item/brand",'/item/Brand',"Brand",null,true),
         route("/item/list",'/item/Goods',"Goods",null,true),
         route("/item/specification",'/item/specification/Specification',"Specification",null,true),
-        route("/user/statistics",'/user/Statistics',"Statistics",null,true),
-        route("/trade/promotion",'/trade/Promotion',"Promotion",null,true)
+        route("/trade/order",'/trade/Order',"Order",null,true)
       ]
     }
   ]
